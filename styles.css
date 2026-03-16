@@ -94,6 +94,126 @@ nav {
     color: var(--primary);
 }
 
+.bypass {
+    background: var(--white);
+    text-align: center;
+}
+
+.bypass-subtitle {
+    margin-bottom: 2rem;
+    color: #666;
+}
+
+.bypass-form {
+    max-width: 500px;
+    margin: 0 auto 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: var(--white);
+}
+
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.btn-precios {
+    background: var(--primary);
+    color: var(--white);
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-precios:hover {
+    background: var(--secondary);
+}
+
+.resultado {
+    background: var(--light);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-top: 2rem;
+}
+
+.resultado h3 {
+    color: var(--primary);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.resultado-senal {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.precios-bypass {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.precio-card {
+    background: var(--white);
+    padding: 1.5rem 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    min-width: 120px;
+}
+
+.precio-card .moneda {
+    display: block;
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.precio-card .monto {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.btn-whatsapp {
+    display: inline-block;
+    background: #25D366;
+    color: var(--white);
+    padding: 1rem 2rem;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.btn-whatsapp:hover {
+    background: #128C7E;
+}
+
 main {
     padding-top: 80px;
 }

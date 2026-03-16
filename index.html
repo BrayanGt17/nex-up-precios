@@ -19,6 +19,7 @@
                         <li><a href="#unlock">Unlock</a></li>
                         <li><a href="#f4">F4</a></li>
                         <li><a href="#licencias">Licencias</a></li>
+                        <li><a href="#bypass">Bypass iPhone 6-X</a></li>
                     </ul>
                 </li>
                 <li><a href="#precios">Precios</a></li>
@@ -135,6 +136,59 @@
             </div>
         </section>
 
+        <section id="bypass" class="bypass">
+            <h2>Bypass iPhone 6 - X</h2>
+            <p class="bypass-subtitle">Selecciona el modelo y el estado actual del equipo</p>
+            
+            <div class="bypass-form">
+                <div class="form-group">
+                    <label for="modelo">Modelo:</label>
+                    <select id="modelo">
+                        <option value="">Seleccionar modelo...</option>
+                        <option value="6">iPhone 6</option>
+                        <option value="6s">iPhone 6s</option>
+                        <option value="7">iPhone 7</option>
+                        <option value="7plus">iPhone 7 Plus</option>
+                        <option value="8">iPhone 8</option>
+                        <option value="8plus">iPhone 8 Plus</option>
+                        <option value="x">iPhone X</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="estado">Estado:</label>
+                    <select id="estado">
+                        <option value="">Seleccionar estado...</option>
+                        <option value="hello">Hello (Sin señal)</option>
+                        <option value="desactivado">Desactivado (Con señal)</option>
+                        <option value="passcode">Passcode (Con señal)</option>
+                    </select>
+                </div>
+                
+                <button onclick="mostrarPrecios()" class="btn-precios">Ver Precios</button>
+            </div>
+            
+            <div id="resultado" class="resultado" style="display: none;">
+                <h3 id="resultado-titulo"></h3>
+                <p id="resultado-senal"></p>
+                <div class="precios-bypass">
+                    <div class="precio-card">
+                        <span class="moneda">USDT</span>
+                        <span class="monto" id="precio-usdt"></span>
+                    </div>
+                    <div class="precio-card">
+                        <span class="moneda">MXN</span>
+                        <span class="monto" id="precio-mxn"></span>
+                    </div>
+                    <div class="precio-card">
+                        <span class="moneda">GTQ</span>
+                        <span class="monto" id="precio-gtq"></span>
+                    </div>
+                </div>
+                <a href="https://wa.me/50212345678" target="_blank" class="btn-whatsapp">Contactar por WhatsApp</a>
+            </div>
+        </section>
+
         <section id="precios" class="precios">
             <h2>Tabla de Precios</h2>
             <div class="precios-table">
@@ -204,5 +258,67 @@
     <footer>
         <p>&copy; 2026 Nex-Up. Todos los derechos reservados.</p>
     </footer>
+
+    <script>
+        const precios = {
+            hello: {
+                '6': { usdt: 25, mxn: 450, gtq: 250 },
+                '6s': { usdt: 25, mxn: 450, gtq: 250 },
+                '7': { usdt: 30, mxn: 550, gtq: 300 },
+                '7plus': { usdt: 35, mxn: 650, gtq: 350 },
+                '8': { usdt: 40, mxn: 750, gtq: 400 },
+                '8plus': { usdt: 45, mxn: 850, gtq: 450 },
+                'x': { usdt: 50, mxn: 950, gtq: 500 }
+            },
+            desactivado: {
+                '6': { usdt: 30, mxn: 550, gtq: 300 },
+                '6s': { usdt: 30, mxn: 550, gtq: 300 },
+                '7': { usdt: 35, mxn: 650, gtq: 350 },
+                '7plus': { usdt: 40, mxn: 750, gtq: 400 },
+                '8': { usdt: 45, mxn: 850, gtq: 450 },
+                '8plus': { usdt: 50, mxn: 950, gtq: 500 },
+                'x': { usdt: 60, mxn: 1100, gtq: 600 }
+            },
+            passcode: {
+                '6': { usdt: 30, mxn: 550, gtq: 300 },
+                '6s': { usdt: 30, mxn: 550, gtq: 300 },
+                '7': { usdt: 35, mxn: 650, gtq: 350 },
+                '7plus': { usdt: 40, mxn: 750, gtq: 400 },
+                '8': { usdt: 45, mxn: 850, gtq: 450 },
+                '8plus': { usdt: 50, mxn: 950, gtq: 500 },
+                'x': { usdt: 60, mxn: 1100, gtq: 600 }
+            }
+        };
+
+        const nombresModelos = {
+            '6': 'iPhone 6', '6s': 'iPhone 6s', '7': 'iPhone 7',
+            '7plus': 'iPhone 7 Plus', '8': 'iPhone 8', '8plus': 'iPhone 8 Plus', 'x': 'iPhone X'
+        };
+
+        function mostrarPrecios() {
+            const modelo = document.getElementById('modelo').value;
+            const estado = document.getElementById('estado').value;
+            const resultado = document.getElementById('resultado');
+            
+            if (!modelo || !estado) {
+                alert('Por favor selecciona modelo y estado');
+                return;
+            }
+            
+            const precio = precios[estado][modelo];
+            const nombreModelo = nombresModelos[modelo];
+            
+            document.getElementById('resultado-titulo').textContent = nombreModelo;
+            document.getElementById('resultado-senal').textContent = 
+                estado === 'hello' ? 'Estado: Hello (Sin señal)' : 'Estado: ' + 
+                (estado === 'desactivado' ? 'Desactivado (Con señal)' : 'Passcode (Con señal)');
+            
+            document.getElementById('precio-usdt').textContent = '$' + precio.usdt;
+            document.getElementById('precio-mxn').textContent = '$' + precio.mxn;
+            document.getElementById('precio-gtq').textContent = 'Q' + precio.gtq;
+            
+            resultado.style.display = 'block';
+        }
+    </script>
 </body>
 </html>
