@@ -26,57 +26,98 @@
                 <a href="servicios.html" class="back-btn">← Volver</a>
                 <h1>🖥️ FRP Xiaomi Server</h1>
                 <p>Bypass FRP por método de servidor Xiaomi</p>
+                <div class="status-indicator">
+                    <span class="status-dot online"></span>
+                    <span class="status-text">Servidor Online</span>
+                </div>
             </div>
 
             <div class="frp-content">
                 <div class="frp-section">
                     <h2>📋 Requisitos Previos</h2>
                     <ul class="frp-list">
-                        <li>Modelo del dispositivo Xiaomi/Redmi/Poco</li>
+                        <li>Dispositivo Xiaomi/Redmi/Poco</li>
+                        <li>Entrar en Modo Sideload (Recovery)</li>
+                        <li>Cable USB en buen estado (puerto estable)</li>
+                        <li>Batería suficiente (mínimo 50%)</li>
                         <li>Cuenta Mi del cliente (para desvincular)</li>
-                        <li>Cable USB original</li>
-                        <li>Computadora con Windows</li>
-                        <li>Drivers Xiaomi instalados</li>
-                        <li>Archivo ROM adecuado para el modelo</li>
+                        <li>Radmin VPN instalado y conectado</li>
+                        <li>USB Redirector instalado</li>
                     </ul>
                 </div>
 
+                <div class="frp-section tools-section">
+                    <h2>🛠️ Herramientas Necesarias</h2>
+                    <div class="tools-grid">
+                        <div class="tool-card">
+                            <div class="tool-icon">🌐</div>
+                            <h3>Radmin VPN</h3>
+                            <p>Red: <strong>NEX-UP SERVER 1</strong></p>
+                            <p>Contraseña: <strong>123456</strong></p>
+                            <a href="#" class="tool-link">Descargar</a>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon">🔌</div>
+                            <h3>USB Redirector</h3>
+                            <p>IP del servidor: <strong>26.85.118.194</strong></p>
+                            <p>Usuario: <strong>nex-up</strong></p>
+                            <a href="#" class="tool-link">Descargar</a>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="frp-section">
-                    <h2>🔌 Modo Fastboot</h2>
+                    <h2>📱 Modo Sideload Xiaomi</h2>
                     <div class="step">
                         <p class="step-title">Paso 1: Apaga completamente el dispositivo</p>
                         <p>Asegúrate de que el equipo esté completamente apagado.</p>
                     </div>
                     <div class="step">
-                        <p class="step-title">Paso 2: Mantén presionados los botones</p>
-                        <p>Presiona simultáneamente <strong>Power + Volumen Abajo</strong> hasta que aparezca el logo de fastboot.</p>
-                    </div>
-                    <div class="step">
-                        <p class="step-title">Paso 3: Conecta a la PC</p>
-                        <p>Conecta el cable USB mientras estás en modo fastboot.</p>
+                        <p class="step-title">Paso 2: Presiona Power + Volumen Arriba</p>
+                        <p>Mantén presionados simultáneamente <strong>Power + Volumen Arriba (+)</strong> hasta que aparezca el menú recovery.</p>
                     </div>
                     <div class="image-container">
-                        <img src="images/fastboot-xiaomi.jpg" alt="Modo Fastboot Xiaomi" onerror="this.parentElement.style.display='none'">
+                        <img src="images/sideload-menu.jpg" alt="Menu Recovery Xiaomi" onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'>📷 Agregar imagen: sideload-menu.jpg</div>'">
+                    </div>
+                    <div class="step">
+                        <p class="step-title">Paso 3: Seleccionar "Connect with MiAssistant"</p>
+                        <p>Usa los botones de volumen para navegar y el power para seleccionar.</p>
+                    </div>
+                    <div class="step">
+                        <p class="step-title">Paso 4: Conecta el USB</p>
+                        <p>Conecta el cable USB a la PC después de seleccionar MiAssistant.</p>
+                    </div>
+                    <div class="image-container">
+                        <img src="images/miassistant-connect.jpg" alt="MiAssistant Connected" onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'>📷 Agregar imagen: miassistant-connect.jpg</div>'">
                     </div>
                 </div>
 
                 <div class="frp-section">
-                    <h2>🛠️ Proceso de FRP Server</h2>
+                    <h2>🔗 Conexión al Servidor</h2>
                     <div class="step">
-                        <p class="step-title">Paso 1: Descargar Mi Flash Pro</p>
-                        <p>Descarga la herramienta Mi Flash Pro o Mi Flash desde fuentes confiables.</p>
+                        <p class="step-title">Paso 1: Conectar Radmin VPN</p>
+                        <p>Abre Radmin VPN yúnete a la red <strong>NEX-UP SERVER 1</strong> con contraseña <strong>123456</strong></p>
+                    </div>
+                    <div class="image-container">
+                        <img src="images/radmin-vpn.jpg" alt="Radmin VPN" onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'>📷 Agregar imagen: radmin-vpn.jpg</div>'">
                     </div>
                     <div class="step">
-                        <p class="step-title">Paso 2: Seleccionar ROM</p>
-                        <p>En la herramienta, selecciona la ROM a.flash y busca la carpeta donde guardaste los archivos.</p>
+                        <p class="step-title">Paso 2: Abrir USB Redirector</p>
+                        <p>Abre USB Redirector e ingresa la IP <strong>26.85.118.194</strong> o copia la del usuario nex-up.</p>
+                    </div>
+                    <div class="image-container">
+                        <img src="images/usb-redirector.jpg" alt="USB Redirector" onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'>📷 Agregar imagen: usb-redirector.jpg</div>'">
                     </div>
                     <div class="step">
-                        <p class="step-title">Paso 3: Flash</p>
-                        <p>Haz clic en "Flash" y espera a que termine el proceso (puede tomar 5-15 minutos).</p>
+                        <p class="step-title">Paso 3: Conectar dispositivo en Sideload</p>
+                        <p>Conecta tu Xiaomi en modo sideload. El servidor detectará el dispositivo.</p>
+                    </div>
+                    <div class="image-container">
+                        <img src="images/device-connected.jpg" alt="Dispositivo Conectado" onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'>📷 Agregar imagen: device-connected.jpg</div>'">
                     </div>
                     <div class="step">
-                        <p class="step-title">Paso 4: Reiniciar</p>
-                        <p>Una vez completado, el equipo se reiniciará. Ya no tendrá el FRP.</p>
+                        <p class="step-title">Paso 4: Notificar al técnico</p>
+                        <p>Una vez el dispositivo esté conectado, notifica a nuestro técnico para proceder con el bypass.</p>
                     </div>
                 </div>
 
@@ -103,15 +144,15 @@
                     <div class="precios-frp">
                         <div class="precio-card">
                             <span class="moneda">USDT</span>
-                            <span class="monto">$10 - $20</span>
-                        </div>
-                        <div class="precio-card">
-                            <span class="moneda">MXN</span>
-                            <span class="monto">$180 - $360</span>
+                            <span class="monto">$15 USDT</span>
                         </div>
                         <div class="precio-card">
                             <span class="moneda">GTQ</span>
-                            <span class="monto">Q100 - Q200</span>
+                            <span class="monto">Q100</span>
+                        </div>
+                        <div class="precio-card">
+                            <span class="moneda">MXN</span>
+                            <span class="monto">$270</span>
                         </div>
                     </div>
                 </div>
@@ -121,13 +162,14 @@
                     <ul class="frp-list">
                         <li>El proceso borra todos los datos del dispositivo</li>
                         <li>Se necesita la cuenta Mi del cliente para configurar después del bypass</li>
-                        <li>Algunos modelos requieren bootloader desbloqueado</li>
-                        <li>No desconectar el cable durante el proceso</li>
+                        <li>Batería mínima del 50% para evitar problemas</li>
+                        <li>Usar cable USB en buen estado</li>
+                        <li>No desconectar durante el proceso</li>
                     </ul>
                 </div>
 
                 <div class="frp-section contact-section">
-                    <a href="https://wa.me/50212345678" target="_blank" class="btn-whatsapp">Contactar por WhatsApp</a>
+                    <a href="https://wa.me/message/V5T4ZDPIF2IBI1" target="_blank" class="btn-whatsapp">Notificar cuando esté conectado</a>
                 </div>
             </div>
         </section>

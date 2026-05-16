@@ -19,6 +19,37 @@
     opacity: 0.9;
 }
 
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255,255,255,0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    margin-top: 1rem;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.status-dot.online {
+    background: #22c55e;
+    box-shadow: 0 0 8px #22c55e;
+}
+
+.status-dot.offline {
+    background: #ef4444;
+    box-shadow: 0 0 8px #ef4444;
+}
+
+.status-text {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
 .back-btn {
     display: inline-block;
     color: var(--white);
@@ -72,6 +103,65 @@
     color: var(--primary);
 }
 
+.tools-section {
+    background: linear-gradient(135deg, #1f2937, #374151);
+    color: var(--white);
+}
+
+.tools-section h2 {
+    color: var(--white);
+}
+
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.tool-card {
+    background: rgba(255,255,255,0.1);
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.tool-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.tool-card h3 {
+    color: var(--white);
+    margin-bottom: 0.75rem;
+}
+
+.tool-card p {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+}
+
+.tool-card strong {
+    color: #f59e0b;
+}
+
+.tool-link {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--white);
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-top: 0.75rem;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.tool-link:hover {
+    background: var(--secondary);
+}
+
 .step {
     margin-bottom: 1rem;
     padding: 1rem;
@@ -100,6 +190,15 @@
     height: auto;
     border-radius: 8px;
     background: var(--light);
+}
+
+.image-placeholder {
+    background: var(--light);
+    padding: 3rem;
+    border-radius: 8px;
+    color: #999;
+    font-size: 1.2rem;
+    text-align: center;
 }
 
 .modelos-grid {
@@ -155,5 +254,9 @@
     .precios-frp {
         flex-direction: column;
         align-items: center;
+    }
+    
+    .tools-grid {
+        grid-template-columns: 1fr;
     }
 }
