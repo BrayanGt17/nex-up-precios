@@ -1,0 +1,119 @@
+.main-drivers {
+    padding-top: 80px;
+    min-height: calc(100vh - 160px);
+}
+
+.drivers-header {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: var(--white);
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.drivers-header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.drivers-header p {
+    opacity: 0.9;
+}
+
+.drivers-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.drivers-section {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.drivers-section h2 {
+    color: var(--primary);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--light);
+}
+
+.tools-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.tool-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: var(--light);
+    border-radius: 8px;
+    transition: transform 0.2s;
+}
+
+.tool-item:hover {
+    transform: translateX(4px);
+}
+
+.tool-info {
+    flex: 1;
+}
+
+.tool-info h3 {
+    color: var(--dark);
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.tool-info p {
+    color: #666;
+    font-size: 0.85rem;
+}
+
+.tool-detail {
+    display: block;
+    color: var(--primary);
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+    font-weight: 500;
+}
+
+.download-btn {
+    background: var(--primary);
+    color: var(--white);
+    padding: 0.6rem 1.25rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: background 0.3s;
+}
+
+.download-btn:hover {
+    background: var(--secondary);
+}
+
+.nav-links .active {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+@media (max-width: 600px) {
+    .tool-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+    
+    .download-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
