@@ -13,8 +13,8 @@
             <div class="logo"><img src="images/Gemini_Generated_Image_1478n51478n51478.png" alt="Nex-Up Logo" class="logo-img"></div>
             <button class="menu-toggle" onclick="toggleMenu()">☰</button>
             <ul class="nav-links">
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="drivers-tools.html">Drivers & Tools</a></li>
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/drivers-tools/">Drivers & Tools</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
         </nav>
@@ -61,6 +61,9 @@
     </footer>
 
     <script>
+        if (window.location.href.indexOf("index.html") > -1) {
+            window.location.href = window.location.href.replace("index.html", "");
+        }
         function toggleMenu() {
             document.querySelector('.nav-links').classList.toggle('active');
         }

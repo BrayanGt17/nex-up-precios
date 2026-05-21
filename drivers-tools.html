@@ -14,9 +14,9 @@
             <div class="logo">Nex-Up</div>
             <button class="menu-toggle" onclick="toggleMenu()">☰</button>
             <ul class="nav-links">
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="drivers-tools.html" class="active">Drivers & Tools</a></li>
-                <li><a href="index.html#contacto">Contacto</a></li>
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/drivers-tools/" class="active">Drivers & Tools</a></li>
+                <li><a href="/#contacto">Contacto</a></li>
             </ul>
         </nav>
     </header>
@@ -105,6 +105,10 @@
     </footer>
 
     <script>
+        var currentPage = window.location.pathname.split('/').pop();
+        if (currentPage === 'drivers-tools.html') {
+            window.location.href = '/drivers-tools/';
+        }
         function toggleMenu() {
             document.querySelector('.nav-links').classList.toggle('active');
         }
