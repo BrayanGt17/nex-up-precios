@@ -234,6 +234,26 @@ main {
     transform: scale(1.05);
 }
 
+.btn-whatsapp-hero {
+    display: inline-block;
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: var(--white);
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 50px;
+    margin-top: 2rem;
+    transition: all 0.3s ease;
+    animation: fadeIn 1s ease-out 0.4s backwards;
+    box-shadow: 0 0 20px rgba(37, 211, 102, 0.3);
+    font-size: 1.1rem;
+}
+
+.btn-whatsapp-hero:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(37, 211, 102, 0.5);
+}
+
 .features {
     max-width: 1200px;
     margin: 0 auto;
