@@ -1,22 +1,40 @@
 .main-drivers {
     padding-top: 80px;
     min-height: calc(100vh - 160px);
+    background: linear-gradient(135deg, var(--dark) 0%, #0d0d15 100%);
 }
 
 .drivers-header {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: var(--white);
-    padding: 3rem 2rem;
+    background: linear-gradient(135deg, rgba(20, 20, 30, 0.9), rgba(10, 10, 15, 0.9));
+    backdrop-filter: blur(20px);
+    padding: 4rem 2rem;
     text-align: center;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.drivers-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), var(--accent), transparent);
 }
 
 .drivers-header h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin-bottom: 0.5rem;
+    color: var(--primary);
+    text-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+    animation: fadeIn 0.8s ease-out;
 }
 
 .drivers-header p {
-    opacity: 0.9;
+    opacity: 0.7;
+    animation: fadeIn 0.8s ease-out 0.2s backwards;
 }
 
 .drivers-content {
@@ -26,11 +44,19 @@
 }
 
 .drivers-section {
-    background: var(--white);
-    border-radius: 12px;
+    background: rgba(20, 20, 30, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    animation: fadeIn 0.8s ease-out;
+    transition: all 0.3s ease;
+}
+
+.drivers-section:hover {
+    border-color: rgba(0, 240, 255, 0.5);
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.1);
 }
 
 .drivers-section h2 {
@@ -38,7 +64,10 @@
     font-size: 1.3rem;
     margin-bottom: 1rem;
     padding-bottom: 0.75rem;
-    border-bottom: 2px solid var(--light);
+    border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .tools-list {
@@ -51,14 +80,18 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
-    background: var(--light);
-    border-radius: 8px;
-    transition: transform 0.2s;
+    padding: 1.2rem;
+    background: rgba(10, 10, 15, 0.6);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 240, 255, 0.1);
+    transition: all 0.3s ease;
+    animation: fadeIn 0.5s ease-out backwards;
 }
 
 .tool-item:hover {
-    transform: translateX(4px);
+    transform: translateX(10px);
+    border-color: var(--primary);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
 }
 
 .tool-info {
@@ -66,13 +99,13 @@
 }
 
 .tool-info h3 {
-    color: var(--dark);
+    color: var(--white);
     font-size: 1rem;
     margin-bottom: 0.25rem;
 }
 
 .tool-info p {
-    color: #666;
+    color: rgba(255, 255, 255, 0.5);
     font-size: 0.85rem;
 }
 
@@ -85,24 +118,28 @@
 }
 
 .download-btn {
-    background: var(--primary);
-    color: var(--white);
-    padding: 0.6rem 1.25rem;
-    border-radius: 6px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: var(--dark);
+    padding: 0.7rem 1.5rem;
+    border-radius: 25px;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 600;
     white-space: nowrap;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
 }
 
 .download-btn:hover {
-    background: var(--secondary);
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(0, 240, 255, 0.5);
 }
 
 .nav-links .active {
     color: var(--primary);
     font-weight: 600;
+    border: 1px solid var(--primary);
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
 }
 
 @media (max-width: 600px) {
