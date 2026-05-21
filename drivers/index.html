@@ -105,6 +105,10 @@
     </footer>
 
     <script>
+        if (window.location.href.includes('.html')) {
+            var newUrl = window.location.href.replace('.html', '');
+            window.location.replace(newUrl);
+        }
         function toggleMenu() {
             document.querySelector('.nav-links').classList.toggle('active');
         }

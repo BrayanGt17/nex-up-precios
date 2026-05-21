@@ -334,6 +334,11 @@
                 }
             });
         }
+        
+        if (window.location.href.includes('.html')) {
+            var newUrl = window.location.href.replace('.html', '');
+            window.location.replace(newUrl);
+        }
     </script>
 </body>
 </html>
