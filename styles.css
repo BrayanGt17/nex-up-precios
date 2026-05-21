@@ -73,6 +73,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .logo {
@@ -330,17 +331,27 @@ footer {
 }
 
 @media (max-width: 768px) {
+    header {
+        position: relative;
+    }
+    
+    nav {
+        flex-wrap: wrap;
+    }
+    
     .nav-links {
         display: none;
         position: fixed;
-        top: 60px;
+        top: 70px;
         left: 0;
         right: 0;
         background: rgba(10, 10, 15, 0.98);
+        backdrop-filter: blur(20px);
         flex-direction: column;
         padding: 1rem;
         gap: 0.5rem;
         border-bottom: 1px solid var(--primary);
+        z-index: 99;
     }
     
     .nav-links.active {
@@ -350,17 +361,30 @@ footer {
     .nav-links a {
         padding: 0.8rem 1rem;
         text-align: center;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+    
+    .nav-links a:hover {
+        border-color: var(--primary);
+        background: rgba(0, 240, 255, 0.1);
     }
     
     .menu-toggle {
         display: block;
-        background: none;
+        background: rgba(0, 240, 255, 0.1);
         border: 1px solid var(--primary);
         color: var(--primary);
-        padding: 0.5rem;
+        padding: 0.6rem 1rem;
         border-radius: 4px;
         cursor: pointer;
-        font-size: 1.5rem;
+        font-size: 1.2rem;
+        line-height: 1;
+    }
+    
+    .menu-toggle:active {
+        background: var(--primary);
+        color: var(--dark);
     }
     
     .hero {
@@ -400,8 +424,4 @@ footer {
     .logo {
         font-size: 1.4rem;
     }
-}
-
-.menu-toggle {
-    display: none;
 }
