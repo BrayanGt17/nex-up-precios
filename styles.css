@@ -76,6 +76,16 @@ nav {
 }
 
 .logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 50px;
+    width: auto;
+}
+
+.logo-text {
     font-size: 1.8rem;
     font-weight: bold;
     background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
@@ -84,6 +94,12 @@ nav {
     background-clip: text;
     text-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
     animation: glow 3s infinite;
+}
+
+@media (max-width: 768px) {
+    .logo-img {
+        height: 40px;
+    }
 }
 
 .nav-links {
