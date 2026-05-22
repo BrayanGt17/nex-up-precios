@@ -25,74 +25,85 @@
     <main class="main-renta">
         <section class="renta-page">
             <div class="renta-header">
-                <h1>🔑 Licencias Digitales</h1>
-                <p>Se envía usuario y contraseña | Entrega inmediata</p>
+                <h1>Licencias Digitales</h1>
+                <p>Se envia usuario y contrasena | Entrega inmediata</p>
             </div>
 
-            <div class="licencias-grid">
-                <div class="licencia-card" onclick="abrirModal('unlocktool')">
-                    <div class="licencia-icon">🔓</div>
+            <div class="search-container">
+                <input type="text" id="buscar" placeholder="Buscar herramienta..." onkeyup="filtrarLicencias()">
+            </div>
+
+            <div class="section-title">Licencias Digitales</div>
+            <div class="licencias-grid" id="licencias-digitales">
+                <div class="licencia-card" onclick="abrirModal('unlocktool', 'digital')">
                     <h3>UnlockTool</h3>
                 </div>
-                <div class="licencia-card" onclick="abrirModal('tsm')">
-                    <div class="licencia-icon">🛠️</div>
+                <div class="licencia-card" onclick="abrirModal('tsm', 'digital')">
                     <h3>TSM Tool</h3>
                 </div>
-                <div class="licencia-card" onclick="abrirModal('android-multitool')">
-                    <div class="licencia-icon">📱</div>
+                <div class="licencia-card" onclick="abrirModal('android-multitool', 'digital')">
                     <h3>Android MultiTool</h3>
                 </div>
-                <div class="licencia-card" onclick="abrirModal('cf-tool')">
-                    <div class="licencia-icon">⚙️</div>
+                <div class="licencia-card" onclick="abrirModal('cf-tool', 'digital')">
                     <h3>CF-Tool</h3>
                 </div>
-                <div class="licencia-card" onclick="abrirModal('samsungtool')">
-                    <div class="licencia-icon">📱</div>
+                <div class="licencia-card" onclick="abrirModal('samsungtool', 'digital')">
                     <h3>Samsung Tool</h3>
                 </div>
-                <div class="licencia-card" onclick="abrirModal('kg-killer')">
-                    <div class="licencia-icon">🔪</div>
+                <div class="licencia-card" onclick="abrirModal('kg-killer', 'digital')">
                     <h3>KG Killer</h3>
                 </div>
-                <div class="licencia-card" onclick="abrirModal('tfm')">
-                    <div class="licencia-icon">🔧</div>
+                <div class="licencia-card" onclick="abrirModal('tfm', 'digital')">
                     <h3>TFM Tool</h3>
                 </div>
-                <div class="licencia-card" onclick="abrirModal('griffin')">
-                    <div class="licencia-icon">🦅</div>
+                <div class="licencia-card" onclick="abrirModal('griffin', 'digital')">
                     <h3>Griffin Unlocker</h3>
                 </div>
-                <div class="licencia-card" onclick="abrirModal('androidwintool')">
-                    <div class="licencia-icon">💻</div>
+                <div class="licencia-card" onclick="abrirModal('androidwintool', 'digital')">
                     <h3>AndroidWinTool</h3>
                 </div>
-                <div class="licencia-card" onclick="abrirModal('mdmfix')">
-                    <div class="licencia-icon">🔐</div>
+                <div class="licencia-card" onclick="abrirModal('mdmfix', 'digital')">
                     <h3>MDMFix Tool</h3>
                 </div>
-                <div class="licencia-card" onclick="abrirModal('anonyshu')">
-                    <div class="licencia-icon">👤</div>
+                <div class="licencia-card" onclick="abrirModal('anonyshu', 'digital')">
                     <h3>Anonyshu Tool</h3>
                 </div>
-                <div class="licencia-card" onclick="abrirModal('dft-pro')">
-                    <div class="licencia-icon">⚡</div>
+                <div class="licencia-card" onclick="abrirModal('dft-pro', 'digital')">
                     <h3>DFT Pro Tool</h3>
                 </div>
-                <div class="licencia-card" onclick="abrirModal('arab-frp')">
-                    <div class="licencia-icon">🌍</div>
+                <div class="licencia-card" onclick="abrirModal('arab-frp', 'digital')">
                     <h3>Arab FRP Tool</h3>
                 </div>
-                <div class="licencia-card" onclick="abrirModal('hydra')">
-                    <div class="licencia-icon">💧</div>
+                <div class="licencia-card" onclick="abrirModal('hydra', 'digital')">
                     <h3>Hydra Tool</h3>
                 </div>
-                <div class="licencia-card" onclick="abrirModal('mst')">
-                    <div class="licencia-icon">🌊</div>
+                <div class="licencia-card" onclick="abrirModal('mst', 'digital')">
                     <h3>MST Mobile Service</h3>
                 </div>
-                <div class="licencia-card" onclick="abrirModal('uat-pro')">
-                    <div class="licencia-icon">🔧</div>
+                <div class="licencia-card" onclick="abrirModal('uat-pro', 'digital')">
                     <h3>UAT Pro Tool</h3>
+                </div>
+            </div>
+
+            <div class="section-title" style="margin-top: 3rem;">Renta de Tools y Server Box</div>
+            <div class="licencias-grid" id="server-box">
+                <div class="licencia-card server" onclick="abrirModal('z3x', 'server')">
+                    <h3>Z3X</h3>
+                </div>
+                <div class="licencia-card server" onclick="abrirModal('octoplus-lg', 'server')">
+                    <h3>Octoplus LG</h3>
+                </div>
+                <div class="licencia-card server" onclick="abrirModal('octoplus-samsung', 'server')">
+                    <h3>Octoplus Samsung</h3>
+                </div>
+                <div class="licencia-card server" onclick="abrirModal('octoplus-huawei', 'server')">
+                    <h3>Octoplus Huawei</h3>
+                </div>
+                <div class="licencia-card server" onclick="abrirModal('sigma-plus', 'server')">
+                    <h3>Sigma Plus</h3>
+                </div>
+                <div class="licencia-card server" onclick="abrirModal('octoplus-frp', 'server')">
+                    <h3>Octoplus FRP</h3>
                 </div>
             </div>
         </section>
@@ -126,28 +137,46 @@
             'arab-frp': { nombre: 'Arab FRP Tool', precio: { usdt: 15, gtq: 90, mxn: 270 } },
             'hydra': { nombre: 'Hydra Tool', precio: { usdt: 30, gtq: 180, mxn: 540 } },
             'mst': { nombre: 'MST Mobile Service', precio: { usdt: 25, gtq: 150, mxn: 450 } },
-            'uat-pro': { nombre: 'UAT Pro Tool', precio: { usdt: 35, gtq: 210, mxn: 630 } }
+            'uat-pro': { nombre: 'UAT Pro Tool', precio: { usdt: 35, gtq: 210, mxn: 630 } },
+            'z3x': { nombre: 'Z3X', precio: { usdt: 40, gtq: 240, mxn: 720 }, server: true },
+            'octoplus-lg': { nombre: 'Octoplus LG', precio: { usdt: 35, gtq: 210, mxn: 630 }, server: true },
+            'octoplus-samsung': { nombre: 'Octoplus Samsung', precio: { usdt: 35, gtq: 210, mxn: 630 }, server: true },
+            'octoplus-huawei': { nombre: 'Octoplus Huawei', precio: { usdt: 35, gtq: 210, mxn: 630 }, server: true },
+            'sigma-plus': { nombre: 'Sigma Plus', precio: { usdt: 30, gtq: 180, mxn: 540 }, server: true },
+            'octoplus-frp': { nombre: 'Octoplus FRP', precio: { usdt: 25, gtq: 150, mxn: 450 }, server: true }
         };
 
         function toggleMenu() {
             document.querySelector('.nav-links').classList.toggle('active');
         }
 
-        function abrirModal(id) {
+        function abrirModal(id, tipo) {
             const licencia = licencias[id];
             const modal = document.getElementById('modal');
             const body = document.getElementById('modal-body');
+            const isServer = licencia.server;
+            
+            let infoExtra = '';
+            if (isServer) {
+                infoExtra = `
+                    <div class="form-group">
+                        <label for="anydesk">Numero de AnyDesk:</label>
+                        <input type="text" id="anydesk" placeholder="Ingresa tu numero de AnyDesk" required>
+                    </div>`;
+            }
+            
+            const tiempoEntrega = isServer ? '1-30 minutos' : '1-5 minutos';
+            const entregaText = isServer ? 'Se conecta por AnyDesk' : 'Se envia user y pass';
             
             body.innerHTML = `
-                <h2>🔑 ${licencia.nombre}</h2>
-                <p class="modal-desc">Acceso a herramienta profesional con usuario y contraseña</p>
+                <h2>${licencia.nombre}</h2>
+                <p class="modal-desc">${entregaText}</p>
                 
                 <div class="modal-info">
-                    <span class="info-badge">⏱️ Entrega: 1-5 minutos</span>
-                    <span class="info-badge">📱 Se envía user y pass</span>
+                    <span class="info-badge">Entrega: ${tiempoEntrega}</span>
                 </div>
                 
-                <h3>💰 Precios</h3>
+                <h3>Precios</h3>
                 <div class="precios-modal">
                     <div class="precio-item">
                         <span class="precio-tipo">USDT</span>
@@ -163,9 +192,9 @@
                     </div>
                 </div>
                 
-                <p class="modal-nota">📝 El acceso se envía en 1-5 minutos después de confirmar el pago</p>
+                ${isServer ? '<p class="modal-nota">Se necesita AnyDesk para conectarse al servidor</p>' : ''}
                 
-                <a href="https://wa.me/50212345678?text=Solicito%20${encodeURIComponent(licencia.nombre)}" target="_blank" class="btn-whatsapp">Ordenar por WhatsApp</a>
+                <a href="https://wa.me/50212345678?text=Solicito%20${encodeURIComponent(licencia.nombre)}${isServer ? '%20(Server)' : ''}" target="_blank" class="btn-whatsapp">Ordenar por WhatsApp</a>
             `;
             
             modal.style.display = 'flex';
@@ -179,6 +208,20 @@
 
         function cerrarModalBtn() {
             document.getElementById('modal').style.display = 'none';
+        }
+
+        function filtrarLicencias() {
+            const input = document.getElementById('buscar').value.toLowerCase();
+            const cards = document.querySelectorAll('.licencia-card');
+            
+            cards.forEach(card => {
+                const texto = card.querySelector('h3').textContent.toLowerCase();
+                if (texto.includes(input)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         }
     </script>
 </body>
