@@ -165,8 +165,9 @@
                     </div>`;
             }
             
-            const tiempoEntrega = licencia.duracion ? licencia.duracion : (isServer ? '1-30 minutos' : '1-5 minutos');
+            const tiempoEntrega = isServer ? '1-30 minutos' : (licencia.duracion ? 'Inmediata' : '1-5 minutos');
             const entregaText = isServer ? 'Se conecta por AnyDesk' : 'Se envia user y pass';
+            const duracionText = licencia.duracion ? `<span class="info-badge">Duracion: ${licencia.duracion}</span>` : '';
             
             body.innerHTML = `
                 <h2>${licencia.nombre}</h2>
@@ -174,6 +175,7 @@
                 
                 <div class="modal-info">
                     <span class="info-badge">Entrega: ${tiempoEntrega}</span>
+                    ${duracionText}
                 </div>
                 
                 <h3>Precios</h3>
