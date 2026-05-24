@@ -25,7 +25,7 @@
     <main class="main-renta">
         <section class="renta-page">
             <div class="renta-header">
-                <h1>Licencias Digitales</h1>
+                <h1>Renta de Tools</h1>
                 <p>Se envia usuario y contrasena | Entrega inmediata</p>
             </div>
 
@@ -122,8 +122,8 @@
 
     <script>
         const licencias = {
-            'unlocktool': { nombre: 'UnlockTool', precio: { usdt: 20, gtq: 120, mxn: 350 } },
-            'tsm': { nombre: 'TSM Tool', precio: { usdt: 25, gtq: 150, mxn: 450 } },
+            'unlocktool': { nombre: 'UnlockTool', precio: { usdt: 3, gtq: 20, mxn: 50 }, duracion: '6 horas' },
+            'tsm': { nombre: 'TSM Tool', precio: { usdt: 3, gtq: 20, mxn: 50 }, duracion: '6 horas' },
             'android-multitool': { nombre: 'Android MultiTool', precio: { usdt: 30, gtq: 180, mxn: 540 } },
             'cf-tool': { nombre: 'CF-Tool', precio: { usdt: 25, gtq: 150, mxn: 450 } },
             'samsungtool': { nombre: 'Samsung Tool', precio: { usdt: 20, gtq: 120, mxn: 350 } },
@@ -165,7 +165,7 @@
                     </div>`;
             }
             
-            const tiempoEntrega = isServer ? '1-30 minutos' : '1-5 minutos';
+            const tiempoEntrega = licencia.duracion ? licencia.duracion : (isServer ? '1-30 minutos' : '1-5 minutos');
             const entregaText = isServer ? 'Se conecta por AnyDesk' : 'Se envia user y pass';
             
             body.innerHTML = `
@@ -194,7 +194,7 @@
                 
                 ${isServer ? '<p class="modal-nota">Se necesita AnyDesk para conectarse al servidor</p>' : ''}
                 
-                <a href="https://wa.me/50212345678?text=Solicito%20${encodeURIComponent(licencia.nombre)}${isServer ? '%20(Server)' : ''}" target="_blank" class="btn-whatsapp">Ordenar por WhatsApp</a>
+                <a href="https://wa.me/5492494026341?text=Solicito%20${encodeURIComponent(licencia.nombre)}${isServer ? '%20(Server)' : ''}" target="_blank" class="btn-whatsapp">Ordenar por WhatsApp</a>
             `;
             
             modal.style.display = 'flex';
