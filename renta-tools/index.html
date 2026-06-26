@@ -29,6 +29,17 @@
                 <p>Se envia usuario y contrasena | Entrega inmediata</p>
             </div>
 
+            <div class="section-title">DSports en Vivo</div>
+            <div class="live-stream-container" style="position: relative; width: 100%; max-width: 800px; margin: 0 auto 2.5rem auto; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; background: #000; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+                <iframe 
+                    src="https://latamvidzfy.org/dsportsar.php" 
+                    referrerpolicy="no-referrer"
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+                    allow="autoplay; encrypted-media; picture-in-picture"
+                    allowfullscreen="true"
+                    scrolling="no">
+                </iframe>
+            </div>
             <div class="search-container">
                 <input type="text" id="buscar" placeholder="Buscar herramienta..." onkeyup="filtrarLicencias()">
             </div>
@@ -165,7 +176,7 @@
                     </div>`;
             }
             
-            const tiempoEntrega = isServer ? '1-30 minutos' : (licencia.duracion ? 'Inmediata' : '1-5 minutos');
+            const tiempoEntrega = isServer ? '1-30 minutos' : (licencia.duracion ? 'Inmediata' : '1-5 minutes');
             const entregaText = isServer ? 'Se conecta por AnyDesk' : 'Se envia user y pass';
             const duracionText = licencia.duracion ? `<span class="info-badge">Renta: ${licencia.duracion}</span>` : '';
             
