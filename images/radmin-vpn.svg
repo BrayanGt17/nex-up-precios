@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1">
+      <stop offset="0%" stop-color="#081320"/>
+      <stop offset="100%" stop-color="#0B1120"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)" rx="24"/>
+  <rect x="120" y="120" width="560" height="210" rx="18" fill="#111827" stroke="#00F0FF" stroke-width="3"/>
+  <circle cx="260" cy="225" r="55" fill="#00F0FF" opacity="0.18"/>
+  <path d="M223 228c17-35 67-50 104-26 9 6 17 16 22 27l-22 12-15 11-16-11-15-6-14 9-13-9-11 6-15 8z" fill="#00F0FF"/>
+  <rect x="430" y="178" width="180" height="18" rx="9" fill="#00F0FF"/>
+  <rect x="430" y="218" width="160" height="18" rx="9" fill="#7B2DFF"/>
+  <rect x="430" y="258" width="150" height="18" rx="9" fill="#FF00AA"/>
+  <text x="400" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="#E2E8F0">Radmin VPN placeholder</text>
+</svg>

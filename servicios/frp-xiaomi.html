@@ -6,18 +6,24 @@
     <title>FRP Xiaomi Server | Nex-Up</title>
     <meta name="description" content="FRP Xiaomi Server - Bypass por servidor">
     <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="frp-xiaomi.css">
+    <link rel="stylesheet" href="../frp-xiaomi.css">
+    <link rel="stylesheet" href="../professional.css">
+    <link rel="stylesheet" href="../holiday.css">
+    <script src="../site-config.js"></script>
+    <script src="../site-access.js"></script>
+    <script src="../particles.js" defer></script>
 </head>
 <body>
     <header>
         <nav>
-            <div class="logo">Nex-Up</div>
+            <a class="logo" href="../" aria-label="Nex-Up, inicio"><img src="../images/logo-navidad.jpg" alt="Logo navideño de Nex-Up" class="logo-img"><span class="logo-text">Nex-Up</span></a>
             <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-<ul class="nav-links">
+            <ul class="nav-links">
                 <li><a href="../">Inicio</a></li>
+                <li><a href="./" class="active" data-page-link="services">Servicios</a></li>
                 <li><a href="../drivers/">Drivers & Tools</a></li>
-                <li><a href="../renta-tools/">Renta Tools</a></li>
-                <li><a href="../#contacto">Contacto</a></li>
+                <li><a href="../renta-tools/" data-page-link="rentalTools">Renta Tools</a></li>
+                <li><a href="../index.html#contacto">Contacto</a></li>
             </ul>
         </nav>
     </header>
@@ -25,7 +31,7 @@
     <main class="main-servicios">
         <section class="frp-page">
             <div class="frp-header">
-                <a href="servicios.html" class="back-btn">← Volver</a>
+                <a href="./" class="back-btn">← Volver</a>
                 <h1>🖥️ FRP Xiaomi Server</h1>
                 <p>Bypass FRP por método de servidor Xiaomi</p>
                 <div class="status-indicator">
@@ -56,14 +62,14 @@
                             <h3>Radmin VPN</h3>
                             <p>Red: <strong>NEX-UP SERVER 1</strong></p>
                             <p>Contraseña: <strong>123456</strong></p>
-                            <a href="#" class="tool-link">Descargar</a>
+                            <a href="../drivers/" class="tool-link">Ir a descargas</a>
                         </div>
                         <div class="tool-card">
                             <div class="tool-icon">🔌</div>
                             <h3>USB Redirector</h3>
                             <p>IP del servidor: <strong>26.85.118.194</strong></p>
                             <p>Usuario: <strong>nex-up</strong></p>
-                            <a href="#" class="tool-link">Descargar</a>
+                            <a href="../drivers/" class="tool-link">Ir a descargas</a>
                         </div>
                     </div>
                 </div>
@@ -79,7 +85,7 @@
                         <p>Mantén presionados simultáneamente <strong>Power + Volumen Arriba (+)</strong> hasta que aparezca el menú recovery.</p>
                     </div>
                     <div class="image-container">
-                        <img src="images/sideload-menu.jpg" alt="Menu Recovery Xiaomi" onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'>📷 Agregar imagen: sideload-menu.jpg</div>'">
+                        <img src="../images/sideload-menu.svg" alt="Menu Recovery Xiaomi" onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'>📷 Agregar imagen: sideload-menu.svg</div>'">
                     </div>
                     <div class="step">
                         <p class="step-title">Paso 3: Seleccionar "Connect with MiAssistant"</p>
@@ -90,7 +96,7 @@
                         <p>Conecta el cable USB a la PC después de seleccionar MiAssistant.</p>
                     </div>
                     <div class="image-container">
-                        <img src="images/miassistant-connect.jpg" alt="MiAssistant Connected" onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'>📷 Agregar imagen: miassistant-connect.jpg</div>'">
+                        <img src="../images/miassistant-connect.svg" alt="MiAssistant Connected" onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'>📷 Agregar imagen: miassistant-connect.svg</div>'">
                     </div>
                 </div>
 
@@ -101,21 +107,21 @@
                         <p>Abre Radmin VPN yúnete a la red <strong>NEX-UP SERVER 1</strong> con contraseña <strong>123456</strong></p>
                     </div>
                     <div class="image-container">
-                        <img src="images/radmin-vpn.jpg" alt="Radmin VPN" onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'>📷 Agregar imagen: radmin-vpn.jpg</div>'">
+                        <img src="../images/radmin-vpn.svg" alt="Radmin VPN" onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'>📷 Agregar imagen: radmin-vpn.svg</div>'">
                     </div>
                     <div class="step">
                         <p class="step-title">Paso 2: Abrir USB Redirector</p>
                         <p>Abre USB Redirector e ingresa la IP <strong>26.85.118.194</strong> o copia la del usuario nex-up.</p>
                     </div>
                     <div class="image-container">
-                        <img src="images/usb-redirector.jpg" alt="USB Redirector" onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'>📷 Agregar imagen: usb-redirector.jpg</div>'">
+                        <img src="../images/usb-redirector.svg" alt="USB Redirector" onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'>📷 Agregar imagen: usb-redirector.svg</div>'">
                     </div>
                     <div class="step">
                         <p class="step-title">Paso 3: Conectar dispositivo en Sideload</p>
                         <p>Conecta tu Xiaomi en modo sideload. El servidor detectará el dispositivo.</p>
                     </div>
                     <div class="image-container">
-                        <img src="images/device-connected.jpg" alt="Dispositivo Conectado" onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'>📷 Agregar imagen: device-connected.jpg</div>'">
+                        <img src="../images/device-connected.svg" alt="Dispositivo Conectado" onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'>📷 Agregar imagen: device-connected.svg</div>'">
                     </div>
                     <div class="step">
                         <p class="step-title">Paso 4: Notificar al técnico</p>

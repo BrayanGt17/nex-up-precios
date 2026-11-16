@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" x2="1">
+      <stop offset="0%" stop-color="#00F0FF"/>
+      <stop offset="100%" stop-color="#FF00AA"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)" rx="24"/>
+  <rect x="150" y="100" width="500" height="220" rx="22" fill="#0B1220" stroke="url(#accent)" stroke-width="3"/>
+  <circle cx="260" cy="210" r="52" fill="#00F0FF" opacity="0.2"/>
+  <path d="M207 214h105l-18 32h-71l-16-32z" fill="#00F0FF" opacity="0.85"/>
+  <rect x="395" y="154" width="220" height="18" rx="9" fill="#00F0FF" opacity="0.9"/>
+  <rect x="395" y="196" width="190" height="18" rx="9" fill="#7B2DFF" opacity="0.9"/>
+  <rect x="395" y="238" width="170" height="18" rx="9" fill="#FF00AA" opacity="0.85"/>
+  <text x="400" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="#E2E8F0">MiAssistant connection placeholder</text>
+</svg>

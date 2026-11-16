@@ -1,0 +1,309 @@
+:root {
+    --primary: #176844;
+    --secondary: #a93642;
+    --accent: #c99a45;
+    --dark: #203a2e;
+    --light: #f5f7f0;
+    --white: #fffefa;
+    --glow-primary: 0 8px 24px rgba(23, 104, 68, 0.14);
+    --glow-secondary: 0 8px 24px rgba(169, 54, 66, 0.12);
+    --glow-accent: 0 8px 24px rgba(201, 154, 69, 0.14);
+    --page: #f6f7f2;
+    --surface: #fffefa;
+    --text: #26382e;
+    --muted: #647469;
+    --line: #e2e7dc;
+    --shadow: 0 16px 40px rgba(32, 58, 46, 0.09);
+}
+
+body {
+    background:
+        radial-gradient(circle at 6% 14%, rgba(201, 154, 69, 0.06), transparent 16rem),
+        var(--page);
+}
+
+.particle-network {
+    position: fixed;
+    z-index: 2;
+    inset: 0;
+    display: block;
+    opacity: 0.68;
+    pointer-events: none;
+}
+
+main,
+footer {
+    position: relative;
+    z-index: 1;
+}
+
+main {
+    z-index: auto;
+}
+
+.main-servicios,
+.main-drivers,
+.main-renta,
+.frp-page {
+    background:
+        radial-gradient(circle, rgba(23, 104, 68, 0.08) 1px, transparent 1.5px) 0 0 / 40px 40px,
+        var(--page);
+}
+
+header {
+    border-bottom-color: var(--line);
+}
+
+header::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--secondary) 0 33%, var(--white) 33% 66%, var(--primary) 66%);
+    content: "";
+}
+
+nav {
+    min-height: 76px;
+    padding-top: 0.55rem;
+    padding-bottom: 0.55rem;
+}
+
+.logo {
+    display: flex;
+    width: auto;
+    height: auto;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    max-width: none;
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.logo-text {
+    color: var(--dark);
+    font-size: 1.15rem;
+    font-weight: 750;
+    letter-spacing: -0.04em;
+}
+
+.logo-img {
+    width: 50px;
+    height: 50px;
+    flex: 0 0 50px;
+    border: 1px solid #e8e8dd;
+    border-radius: 50%;
+    max-width: none;
+    background: #fff;
+    object-fit: cover;
+    box-shadow: none;
+    transform: scale(1.18);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    background: #edf4eb;
+}
+
+.hero {
+    z-index: auto;
+    background:
+        radial-gradient(ellipse at 82% 18%, rgba(169, 54, 66, 0.18), transparent 32%),
+        radial-gradient(ellipse at 14% 82%, rgba(201, 154, 69, 0.12), transparent 34%),
+        linear-gradient(135deg, #102b1e, #194431 62%, #123428);
+}
+
+.hero::before {
+    background:
+        radial-gradient(circle, rgba(255, 255, 255, 0.55) 1px, transparent 2px) 0 0 / 74px 74px,
+        radial-gradient(circle, rgba(255, 255, 255, 0.32) 1px, transparent 2px) 34px 27px / 103px 103px;
+    opacity: 0.35;
+    z-index: 0;
+}
+
+.hero > * {
+    position: relative;
+    z-index: 3;
+}
+
+.hero-logo {
+    width: 174px;
+    height: 174px;
+    margin-bottom: 0.5rem;
+    border: 4px solid rgba(255, 255, 255, 0.82);
+    border-radius: 50%;
+    background: #fff;
+    opacity: 1;
+    object-fit: cover;
+    box-shadow: 0 16px 38px rgba(8, 24, 16, 0.25);
+    transform: scale(1.18);
+}
+
+.features,
+.contacto,
+footer {
+    z-index: 3;
+}
+
+.features,
+.contacto {
+    position: relative;
+}
+
+.btn-primary {
+    border-color: var(--primary);
+    background: var(--primary);
+}
+
+.btn-primary:hover,
+.btn-whatsapp-hero:hover,
+.btn-whatsapp:hover {
+    box-shadow: 0 10px 24px rgba(23, 104, 68, 0.22);
+}
+
+.btn-whatsapp-hero,
+.btn-whatsapp {
+    background: linear-gradient(135deg, #238254, #176844);
+}
+
+.feature-card {
+    border-top: 3px solid var(--primary);
+}
+
+.feature-card:nth-child(2) {
+    border-top-color: var(--secondary);
+}
+
+.feature-card:nth-child(3) {
+    border-top-color: var(--accent);
+}
+
+.feature-icon {
+    color: var(--primary);
+    background: #edf4eb;
+}
+
+.feature-card:nth-child(2) .feature-icon {
+    color: var(--secondary);
+    background: #f9eff0;
+}
+
+.feature-card:nth-child(3) .feature-icon {
+    color: #8a6525;
+    background: #fbf5e8;
+}
+
+.contacto {
+    border-top: 3px solid var(--secondary);
+}
+
+.drivers-header,
+.renta-header,
+.frp-header {
+    background:
+        radial-gradient(ellipse at 86% 12%, rgba(169, 54, 66, 0.08), transparent 36%),
+        radial-gradient(ellipse at 12% 100%, rgba(201, 154, 69, 0.08), transparent 32%),
+        var(--surface);
+}
+
+.drivers-header::after,
+.renta-header::after,
+.frp-header::after {
+    position: absolute;
+    top: 1.25rem;
+    right: max(1.25rem, calc((100% - 1120px) / 2));
+    color: #b48b3b;
+    content: "\2744  \2726  \2744";
+    font-size: 1.15rem;
+    letter-spacing: 0.3rem;
+    pointer-events: none;
+}
+
+.servicio-card:hover,
+.licencia-card:hover {
+    border-color: #c8d9c9;
+}
+
+.licencia-card.server,
+.licencia-card.server:hover {
+    border-color: #ead1d3;
+}
+
+.status-indicator {
+    border-color: #cde5d3;
+    color: #176844;
+    background: #eff7ee;
+}
+
+.status-dot.online {
+    background: #238254;
+}
+
+.status-text {
+    color: #176844;
+}
+
+.modal-nota {
+    border-color: #ead1d3;
+    color: #87363f;
+    background: #fbf1f1;
+}
+
+.search-container input:focus,
+.form-group input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(23, 104, 68, 0.12);
+}
+
+.back-btn:hover {
+    color: var(--primary);
+    background: #edf4eb;
+}
+
+.tool-link,
+.download-btn {
+    border-color: var(--primary);
+    background: var(--primary);
+}
+
+.tool-link:hover,
+.download-btn:hover {
+    background: #115436;
+}
+
+@media (max-width: 768px) {
+    nav {
+        min-height: 72px;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .logo-text {
+        font-size: 1.05rem;
+    }
+
+    .logo-img {
+        width: 46px;
+        height: 46px;
+        flex-basis: 46px;
+    }
+
+    .hero-logo {
+        width: 138px;
+        height: 138px;
+    }
+
+    .drivers-header::after,
+    .renta-header::after,
+    .frp-header::after {
+        top: 0.75rem;
+        right: 0.75rem;
+        font-size: 0.9rem;
+    }
+}
+
