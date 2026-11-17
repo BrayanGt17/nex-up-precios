@@ -9,7 +9,7 @@
     --glow-secondary: 0 8px 24px rgba(21, 101, 165, 0.14);
     --glow-accent: 0 8px 24px rgba(201, 154, 69, 0.14);
     --page: #f4f7fb;
-    --surface: #fffefa;
+    --surface: rgba(255, 254, 250, 0.12);
     --text: #192b42;
     --muted: #64748b;
     --line: #e2e8f0;
@@ -50,14 +50,44 @@ main {
 }
 
 .main-glosario {
-    background: linear-gradient(135deg, rgba(20, 39, 62, 0.88), rgba(29, 56, 84, 0.86));
+    background: transparent;
 }
 
 header {
     border-bottom-color: var(--line);
     border-bottom-color: rgba(143, 226, 231, 0.16);
-    background: rgba(15, 32, 51, 0.9);
+    background: rgba(15, 32, 51, 0.78);
     box-shadow: 0 10px 28px rgba(5, 18, 35, 0.18);
+}
+
+footer {
+    background: rgba(23, 40, 62, 0.84);
+    backdrop-filter: blur(12px);
+}
+
+.feature-card,
+.contacto,
+.servicio-card,
+.drivers-section,
+.frp-section,
+.tool-card,
+.step,
+.modelo-item,
+.precio-item,
+.precios-frp .precio-card,
+.licencia-card,
+.modal-content {
+    backdrop-filter: blur(2px);
+}
+
+.tool-card,
+.step,
+.modelo-item {
+    background: rgba(255, 254, 250, 0.12);
+}
+
+.precio-item {
+    background: rgba(255, 254, 250, 0.12);
 }
 
 .logo-text {
@@ -129,7 +159,7 @@ nav {
 
 .nav-links a:hover,
 .nav-links a.active {
-    background: #eaf5f6;
+    background: rgba(105, 214, 223, 0.12);
 }
 
 .hero {
@@ -325,7 +355,7 @@ footer {
 
     .nav-links {
         border-bottom-color: rgba(143, 226, 231, 0.2);
-        background: rgba(15, 32, 51, 0.98);
+        background: rgba(15, 32, 51, 0.82);
         box-shadow: 0 16px 32px rgba(5, 18, 35, 0.24);
     }
 

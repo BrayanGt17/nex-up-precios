@@ -23,7 +23,7 @@
 
 .glosario-header p,
 .glosario-nota {
-    color: rgba(255, 255, 255, 0.75);
+    color: var(--muted);
 }
 
 .glosario-grid {
@@ -36,7 +36,8 @@
     padding: 1.5rem;
     border: 1px solid rgba(0, 240, 255, 0.2);
     border-radius: 16px;
-    background: rgba(20, 20, 30, 0.8);
+    background: rgba(255, 254, 250, 0.12);
+    backdrop-filter: blur(2px);
 }
 
 .termino-card dt {
@@ -47,7 +48,7 @@
 }
 
 .termino-card dd {
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--text);
 }
 
 .glosario-nota {

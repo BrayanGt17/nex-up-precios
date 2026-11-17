@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Consulta la información de operador de un iPhone de Estados Unidos.">
+    <title>Check Carrier iPhone | Nex-Up</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../professional.css">
+    <link rel="stylesheet" href="../holiday.css">
+    <link rel="stylesheet" href="iphone-carrier.css">
+    <script src="../site-config.js"></script>
+    <script src="../particles.js" defer></script>
+    <script src="iphone-carrier.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <a class="logo" href="../" aria-label="Nex-Up, inicio"><img src="../images/logo-navidad.jpg" alt="Logo de Nex-Up" class="logo-img"><span class="logo-text">Nex-Up</span></a>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menú">☰</button>
+            <ul class="nav-links">
+                <li><a href="../">Inicio</a></li>
+                <li><a href="../servicios/" data-page-link="services">Servicios</a></li>
+                <li><a href="../drivers/">Drivers &amp; Tools</a></li>
+                <li><a href="../renta-tools/" data-page-link="rentalTools">Renta Tools</a></li>
+                <li><a href="../glosario/">Glosario</a></li>
+                <li><a class="active" href="./" aria-current="page">Check Carrier iPhone</a></li>
+                <li><a href="../index.html#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="carrier-main">
+        <section class="carrier-panel" aria-labelledby="carrier-title">
+            <span class="carrier-eyebrow">NEX-UP <i></i> CHECK IPHONE</span>
+            <h1 id="carrier-title">Check <span>iPhone</span></h1>
+            <p class="carrier-intro">Consulta información de operador(carrier) y FMI(icloud) asociada al IMEI de un iPhone.</p>
+
+            <form id="carrier-form" class="carrier-form">
+                <label for="carrier-service">Tipo de consulta</label>
+                <select id="carrier-service" name="service">
+                    <option value="103">Carrier</option>
+                    <option value="78">Carrier + FMI</option>
+                    <option value="3">Solo FMI</option>
+                </select>
+
+                <label for="imei">IMEI del iPhone</label>
+                <div class="carrier-input-row">
+                    <input
+                        id="imei"
+                        name="imei"
+                        type="text"
+                        inputmode="numeric"
+                        autocomplete="off"
+                        maxlength="15"
+                        pattern="[0-9]{15}"
+                        placeholder="Ingresa los 15 dígitos"
+                        aria-describedby="imei-help fmi-compatibility"
+                        required
+                    >
+                    <button id="carrier-submit" type="submit">Consultar</button>
+                </div>
+                <small id="imei-help">Marca *#06# en el iPhone para ver su IMEI.</small>
+                <small id="fmi-compatibility" hidden>La consulta Solo FMI no es compatible con dispositivos solo Wi-Fi.</small>
+            </form>
+
+            <section id="carrier-result" class="carrier-result" aria-live="polite" hidden>
+                <h2 id="carrier-result-title">Resultado de consulta</h2>
+                <p id="carrier-status"></p>
+                <pre id="carrier-output"></pre>
+            </section>
+
+            
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Nex-Up. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+name = "nex-up-iphone-carrier"
+main = "src/index.js"
+compatibility_date = "2026-11-17"
+workers_dev = true
+
+[[durable_objects.bindings]]
+name = "DAILY_LIMITER"
+class_name = "DailyRateLimiter"
+
+[exports.DailyRateLimiter]
+type = "durable-object"
+storage = "sqlite"
