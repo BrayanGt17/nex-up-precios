@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glosario | Nex-Up</title>
+    <meta name="description" content="Explicación sencilla de términos usados en servicios móviles y reparación de dispositivos.">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="glosario.css">
+    <link rel="stylesheet" href="../professional.css">
+    <link rel="stylesheet" href="../holiday.css">
+    <script src="../site-config.js"></script>
+    <script src="../site-access.js"></script>
+    <script src="../particles.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <a class="logo" href="../" aria-label="Nex-Up, inicio"><img src="../images/logo-navidad.jpg" alt="Logo navideño de Nex-Up" class="logo-img"><span class="logo-text">Nex-Up</span></a>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <ul class="nav-links">
+                <li><a href="../">Inicio</a></li>
+                <li><a href="../servicios/" data-page-link="services">Servicios</a></li>
+                <li><a href="../drivers/">Drivers & Tools</a></li>
+                <li><a href="../renta-tools/" data-page-link="rentalTools">Renta Tools</a></li>
+                <li><a href="./" class="active" aria-current="page">Glosario</a></li>
+                <li><a href="../index.html#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-glosario">
+        <section class="glosario-page">
+            <div class="glosario-header">
+                <h1>Glosario de términos</h1>
+                <p>Una guía sencilla para entender algunos términos que se usan en servicios de dispositivos móviles.</p>
+            </div>
+
+            <dl class="glosario-grid">
+                <div class="termino-card">
+                    <dt>MDM</dt>
+                    <dd>Significa <em>Mobile Device Management</em> (gestión de dispositivos móviles). Empresas, escuelas y otras organizaciones lo usan para configurar equipos, instalar aplicaciones y aplicar políticas de seguridad a distancia. El administrador de la organización controla el perfil y puede restringir algunas funciones.</dd>
+                </div>
+                <div class="termino-card">
+                    <dt>KG</dt>
+                    <dd>Abreviatura de Knox Guard, una solución de seguridad y administración de Samsung. Puede usarse para proteger equipos financiados o administrados y aplicar restricciones según su estado. Las funciones disponibles dependen del modelo, la región y la configuración del proveedor.</dd>
+                </div>
+                <div class="termino-card">
+                    <dt>F4</dt>
+                    <dd>En el uso indicado por Nex-Up, se refiere al cambio de IMEI. El IMEI es el número que identifica un equipo en redes móviles y no es lo mismo que el número telefónico o la tarjeta SIM. Su modificación puede estar restringida o prohibida por la normativa local; cualquier servicio debe contar con autorización y cumplir la ley.</dd>
+                </div>
+                <div class="termino-card">
+                    <dt>CPU</dt>
+                    <dd>Es la unidad central de procesamiento: ejecuta instrucciones y coordina tareas del teléfono o la computadora. En móviles suele formar parte de un conjunto de componentes llamado SoC (sistema en chip). Un problema de rendimiento no siempre significa que la CPU esté dañada.</dd>
+                </div>
+                <div class="termino-card">
+                    <dt>FRP</dt>
+                    <dd>Significa <em>Factory Reset Protection</em> (protección tras restablecimiento de fábrica) y es una función antirrobo de Android vinculada a la cuenta de Google configurada en el equipo. Si se restablece sin quitar antes esa cuenta, Android puede solicitarla durante la configuración inicial para comprobar que quien configura el dispositivo está autorizado. Para recuperar el acceso, se debe usar la cuenta vinculada o los canales oficiales del propietario o fabricante.</dd>
+                </div>
+                <div class="termino-card">
+                    <dt>BYPASS</dt>
+                    <dd>En este contexto, “Pass MDM” se refiere a un bypass de la pantalla o restricción de administración MDM. Un bypass no necesariamente elimina el equipo del sistema de administración de la organización y la gestión puede reaparecer después de una restauración o al conectarse a sus servicios. Solo debe solicitarse con autorización del propietario o administrador; para una desvinculación permanente, la organización debe retirar el equipo de su sistema.</dd>
+                </div>
+            </dl>
+
+            <p class="glosario-nota">Los nombres y resultados de los servicios pueden variar según el modelo, el estado del equipo y el proveedor. Si un término no coincide con tu caso, consúltanos antes de solicitar el servicio.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Nex-Up. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

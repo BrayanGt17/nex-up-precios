@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="professional.css">
     <link rel="stylesheet" href="holiday.css">
+    <link rel="stylesheet" href="home-premium.css">
     <script src="site-config.js"></script>
     <script src="site-access.js"></script>
     <script src="particles.js" defer></script>
@@ -15,33 +16,66 @@
 <body>
     <header>
         <nav>
-            <a class="logo" href="index.html" aria-label="Nex-Up, inicio"><img src="images/logo-navidad.jpg" alt="Logo navideño de Nex-Up" class="logo-img"><span class="logo-text">Nex-Up</span></a>
+            <a class="logo" href="index.html" aria-label="Nex-Up, inicio"><img src="images/logo-navidad.jpg" alt="Logo de Nex-Up" class="logo-img"><span class="logo-text">Nex-Up</span></a>
             <button class="menu-toggle" onclick="toggleMenu()">☰</button>
             <ul class="nav-links">
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="servicios/" data-page-link="services">Servicios</a></li>
                 <li><a href="drivers/">Drivers & Tools</a></li>
                 <li><a href="renta-tools/" data-page-link="rentalTools">Renta Tools</a></li>
+                <li><a href="glosario/">Glosario</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
         </nav>
     </header>
 
-    <main>
-        <section class="hero">
-            <img class="hero-logo" src="images/logo-navidad.jpg" alt="Logo navideño de Nex-Up">
-            <h1>Nex-Up</h1>
-            <p>Servicios remotos profesionales, sin salir de casa y desde tu PC.</p>
-            <a href="https://wa.me/50239681465" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-hero">
-                <svg class="whatsapp-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-                    <path fill="#25D366" d="M16 1.5A14.4 14.4 0 0 0 3.7 23.4l-2 7.1 7.3-1.9A14.4 14.4 0 1 0 16 1.5Z"/>
-                    <path fill="#fff" d="M23.2 19.4c-.4-.2-2.3-1.1-2.7-1.2-.4-.1-.7-.2-.9.2-.3.4-1 1.2-1.3 1.5-.2.3-.5.3-.9.1-.4-.2-1.7-.6-3.1-1.9-1.2-1.1-2-2.3-2.2-2.7-.2-.4 0-.6.2-.8l.6-.7c.2-.2.3-.4.4-.7.1-.3 0-.5 0-.7-.1-.2-.9-2.2-1.3-3-.3-.8-.7-.7-.9-.7h-.8c-.3 0-.7.1-1 .5-.3.4-1.3 1.3-1.3 3.2s1.4 3.7 1.6 4c.2.3 2.8 4.3 6.8 6 .9.4 1.7.7 2.3.8 1 .3 1.8.3 2.5.2.8-.1 2.3-.9 2.7-1.8.3-.9.3-1.7.2-1.8-.1-.2-.4-.3-.8-.5Z"/>
-                </svg>
-                <span>Contactar por WhatsApp</span>
-            </a>
+    <main class="home-main">
+        <section class="hero home-hero" aria-labelledby="home-title">
+            <div class="home-hero-inner">
+                <div class="home-hero-copy">
+                    <span class="home-eyebrow"><span aria-hidden="true"></span> NEX-UP <i></i> TECNOLOGÍA Y SOPORTE</span>
+                    <h1 id="home-title">Soluciones digitales <span>a tu alcance.</span></h1>
+                    <p>Servicios remotos, herramientas y soporte especializado para ayudarte a resolver lo que necesitas.</p>
+                    <div class="home-actions">
+                        <a href="https://wa.me/50239681465" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-hero">
+                            <svg class="whatsapp-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+                                <path fill="#25D366" d="M16 1.5A14.4 14.4 0 0 0 3.7 23.4l-2 7.1 7.3-1.9A14.4 14.4 0 1 0 16 1.5Z"/>
+                                <path fill="#fff" d="M23.2 19.4c-.4-.2-2.3-1.1-2.7-1.2-.4-.1-.7-.2-.9.2-.3.4-1 1.2-1.3 1.5-.2.3-.5.3-.9.1-.4-.2-1.7-.6-3.1-1.9-1.2-1.1-2-2.3-2.2-2.7-.2-.4 0-.6.2-.8l.6-.7c.2-.2.3-.4.4-.7.1-.3 0-.5 0-.7-.1-.2-.9-2.2-1.3-3-.3-.8-.7-.7-.9-.7h-.8c-.3 0-.7.1-1 .5-.3.4-1.3 1.3-1.3 3.2s1.4 3.7 1.6 4c.2.3 2.8 4.3 6.8 6 .9.4 1.7.7 2.3.8 1 .3 1.8.3 2.5.2.8-.1 2.3-.9 2.7-1.8.3-.9.3-1.7.2-1.8-.1-.2-.4-.3-.8-.5Z"/>
+                            </svg>
+                            <span>Hablar con un asesor</span>
+                        </a>
+                        <a class="home-secondary-action" href="#servicios-home">Explorar servicios <span aria-hidden="true">↓</span></a>
+                    </div>
+                    <div class="home-highlights" aria-label="Lo que encontrarás en Nex-Up">
+                        <span>Atención remota</span>
+                        <span>Soporte especializado</span>
+                        <span>Herramientas digitales</span>
+                    </div>
+                </div>
+
+                <div class="home-hero-visual">
+                    <div class="hero-orbit hero-orbit-outer" aria-hidden="true"></div>
+                    <div class="hero-orbit hero-orbit-inner" aria-hidden="true"></div>
+                    <div class="home-logo-frame">
+                        <img class="hero-logo" src="images/logo-navidad.jpg" alt="Logo de Nex-Up">
+                    </div>
+                    <div class="home-visual-caption">
+                        <span class="caption-indicator" aria-hidden="true"></span>
+                        <div>
+                            <strong>Nex-Up</strong>
+                            <span>Soluciones a distancia</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section class="features">
+        <section class="features home-features" id="servicios-home" aria-labelledby="home-features-title">
+            <div class="home-section-heading">
+                <span>EXPLORA NEX-UP</span>
+                <h2 id="home-features-title">Soluciones para cada necesidad</h2>
+                <p>Encuentra el servicio, la herramienta o el soporte adecuado.</p>
+            </div>
             <div class="feature-card" data-page-link="services">
                 <div class="feature-icon">🔓</div>
                 <h3>Servicios especializados</h3>
@@ -80,8 +114,10 @@
             </article>
         </section>
 
-        <section id="contacto" class="contacto">
-            <h2>Contacto</h2>
+        <section id="contacto" class="contacto home-contact">
+            <span>¿LISTO PARA EMPEZAR?</span>
+            <h2>Estamos para ayudarte</h2>
+            <p>Escríbenos y cuéntanos qué servicio o herramienta necesitas.</p>
             <a class="contact-whatsapp" href="https://wa.me/50239681465" target="_blank" rel="noopener noreferrer">
                 <svg class="whatsapp-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
                     <path fill="#25D366" d="M16 1.5A14.4 14.4 0 0 0 3.7 23.4l-2 7.1 7.3-1.9A14.4 14.4 0 1 0 16 1.5Z"/>

@@ -1,10 +1,10 @@
 (function () {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const palette = [
-        { color: "125, 216, 169", fill: "#51c789" },
-        { color: "245, 144, 152", fill: "#ed6875" },
-        { color: "244, 208, 136", fill: "#efc767" },
-        { color: "145, 206, 222", fill: "#63bddc" }
+        { color: "83, 211, 220", fill: "#58c7d4" },
+        { color: "91, 157, 223", fill: "#6498d6" },
+        { color: "117, 184, 232", fill: "#74b8e8" },
+        { color: "179, 214, 235", fill: "#a8d7ef" }
     ];
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -32,9 +32,9 @@
             return {
                 x: Math.random() * width,
                 y: Math.random() * height,
-                velocityX: (Math.random() - 0.5) * 0.45,
-                velocityY: (Math.random() - 0.5) * 0.45,
-                radius: 1.3 + Math.random() * 1.5,
+                velocityX: (Math.random() - 0.5) * 0.35,
+                velocityY: (Math.random() - 0.5) * 0.35,
+                radius: 1.1 + Math.random() * 1.25,
                 color: palette[paletteIndex]
             };
         }
@@ -48,8 +48,8 @@
             canvas.style.height = height + "px";
             context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
 
-            const particleCount = Math.min(90, Math.max(26, Math.round(width * height / 16000)));
-            maxDistance = Math.min(180, Math.max(110, width / 8));
+            const particleCount = Math.min(64, Math.max(20, Math.round(width * height / 22000)));
+            maxDistance = Math.min(150, Math.max(100, width / 9));
             particles = Array.from({ length: particleCount }, createParticle);
 
             if (reducedMotion) {
@@ -82,7 +82,7 @@
                     const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
                     if (distance < maxDistance) {
-                        const opacity = (1 - distance / maxDistance) * 0.28;
+                        const opacity = (1 - distance / maxDistance) * 0.2;
                         context.beginPath();
                         context.moveTo(particle.x, particle.y);
                         context.lineTo(other.x, other.y);
@@ -98,7 +98,7 @@
                 context.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
                 context.fillStyle = particle.color.fill;
                 context.shadowColor = particle.color.fill;
-                context.shadowBlur = 12;
+                context.shadowBlur = 8;
                 context.fill();
                 context.shadowBlur = 0;
             });

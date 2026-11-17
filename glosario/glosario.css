@@ -1,0 +1,67 @@
+.main-glosario {
+    padding: 110px 1.5rem 3rem;
+    min-height: calc(100vh - 160px);
+    background: linear-gradient(135deg, var(--dark) 0%, #0d0d15 100%);
+}
+
+.glosario-page {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.glosario-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.glosario-header h1 {
+    color: var(--primary);
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+    text-shadow: 0 0 30px rgba(0, 240, 255, 0.4);
+}
+
+.glosario-header p,
+.glosario-nota {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.glosario-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 1.25rem;
+}
+
+.termino-card {
+    padding: 1.5rem;
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    border-radius: 16px;
+    background: rgba(20, 20, 30, 0.8);
+}
+
+.termino-card dt {
+    margin-bottom: 0.5rem;
+    color: var(--primary);
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.termino-card dd {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.glosario-nota {
+    max-width: 850px;
+    margin: 2rem auto 0;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .main-glosario {
+        padding: 100px 1rem 2rem;
+    }
+
+    .glosario-header h1 {
+        font-size: 1.9rem;
+    }
+}
