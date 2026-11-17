@@ -91,12 +91,29 @@
     }
 
     function getPublicProviderResult(data) {
-        if (!data || typeof data !== "object" || Array.isArray(data)) {
+        if (typeof data === "string") {
+            const trimmedData = data.trim();
+            if (trimmedData.startsWith("{") || trimmedData.startsWith("[")) {
+                try {
+                    return getPublicProviderResult(JSON.parse(trimmedData));
+                } catch (error) {
+                    if (!(error instanceof SyntaxError)) {
+                        throw error;
+                    }
+                }
+            }
+            return data;
+        }
+
+        if (Array.isArray(data)) {
+            return removePrivateProviderFields(data);
+        }
+        if (!data || typeof data !== "object") {
             return data;
         }
 
         if (Object.prototype.hasOwnProperty.call(data, "result")) {
-            return removePrivateProviderFields(data.result);
+            return getPublicProviderResult(data.result);
         }
 
         const publicFields = removePrivateProviderFields(data);
