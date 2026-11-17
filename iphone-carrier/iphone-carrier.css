@@ -177,6 +177,37 @@
     overflow-wrap: anywhere;
 }
 
+.carrier-copy {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.9rem;
+    padding: 0.7rem 0.95rem;
+    border: 1px solid rgba(143, 226, 231, 0.35);
+    border-radius: 9px;
+    color: #eafcff;
+    background: rgba(8, 127, 140, 0.42);
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.carrier-copy:hover {
+    transform: translateY(-1px);
+    background: rgba(8, 127, 140, 0.68);
+}
+
+.carrier-copy[hidden] {
+    display: none;
+}
+
+.copy-feedback {
+    min-height: 1.4em;
+    color: #a4e7eb;
+    font-size: 0.82rem;
+}
+
 .carrier-notice {
     margin-top: 1.5rem;
     color: rgba(240, 248, 255, 0.62);

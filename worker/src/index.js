@@ -6,7 +6,7 @@ const ALLOWED_ORIGINS = new Set([
     "http://127.0.0.1:5500"
 ]);
 const SICKW_SERVICES = new Set(["103", "78", "3"]);
-const DAILY_QUERY_LIMIT = 5;
+const DAILY_QUERY_LIMIT = 10;
 
 function jsonResponse(body, status, headers) {
     return new Response(JSON.stringify(body), {
@@ -87,7 +87,7 @@ export default {
         if (!quota.allowed) {
             return jsonResponse(
                 {
-                    error: "Ya alcanzaste el límite de 5 consultas por IP al día (hora de Guatemala). Inténtalo mañana.",
+                    error: "Ya alcanzaste el límite de 10 consultas diarias por IP. Inténtalo mañana.",
                     remaining: 0,
                     resetsAt: quota.resetsAt
                 },

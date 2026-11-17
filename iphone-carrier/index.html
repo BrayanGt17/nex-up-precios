@@ -34,14 +34,14 @@
         <section class="carrier-panel" aria-labelledby="carrier-title">
             <span class="carrier-eyebrow">NEX-UP <i></i> CHECK IPHONE</span>
             <h1 id="carrier-title">Check <span>iPhone</span></h1>
-            <p class="carrier-intro">Consulta información de operador(carrier) y FMI(icloud) asociada al IMEI de un iPhone.</p>
+            <p class="carrier-intro">Carrier es el operador de telefonía móvil. FMI indica el estado de iCloud (Buscar mi iPhone). Elige qué información quieres consultar.</p>
 
             <form id="carrier-form" class="carrier-form">
                 <label for="carrier-service">Tipo de consulta</label>
                 <select id="carrier-service" name="service">
-                    <option value="103">Carrier</option>
-                    <option value="78">Carrier + FMI</option>
-                    <option value="3">Solo FMI</option>
+                    <option value="103">Operador (Carrier)</option>
+                    <option value="78">Operador + estado de iCloud (Carrier + FMI)</option>
+                    <option value="3">Solo estado de iCloud (FMI)</option>
                 </select>
 
                 <label for="imei">IMEI del iPhone</label>
@@ -68,9 +68,12 @@
                 <h2 id="carrier-result-title">Resultado de consulta</h2>
                 <p id="carrier-status"></p>
                 <pre id="carrier-output"></pre>
+                <button id="copy-result" class="carrier-copy" type="button" hidden>Copiar resultado Nex-Up</button>
+                <p id="copy-feedback" class="copy-feedback" aria-live="polite"></p>
             </section>
 
-            
+            <p class="carrier-notice">Límite compartido de hasta 10 consultas por IP al día (hora de Guatemala), entre las tres modalidades. El resultado copiado incluye la marca Nex-Up, la consulta, el IMEI y todos los datos devueltos.</p>
+        </section>
     </main>
 
     <footer>

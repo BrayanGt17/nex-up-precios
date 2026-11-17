@@ -8,13 +8,83 @@
     const resultTitle = document.getElementById("carrier-result-title");
     const status = document.getElementById("carrier-status");
     const output = document.getElementById("carrier-output");
+    const copyButton = document.getElementById("copy-result");
+    const copyFeedback = document.getElementById("copy-feedback");
+    let brandedResult = "";
 
     function showResult(title, message, data) {
         result.hidden = false;
         resultTitle.textContent = title;
         status.textContent = message;
-        output.textContent = data ? JSON.stringify(data, null, 2) : "";
-        output.hidden = !data;
+        const hasData = data !== undefined && data !== null;
+        output.textContent = hasData
+            ? (typeof data === "string" ? data : JSON.stringify(data, null, 2))
+            : "";
+        output.hidden = !hasData;
+        copyButton.hidden = !hasData;
+        copyFeedback.textContent = "";
+    }
+
+    function buildBrandedResult(serviceName, imei, data) {
+        const details = typeof data === "string" ? data : JSON.stringify(data, null, 2);
+        const timestamp = new Intl.DateTimeFormat("es-GT", {
+            dateStyle: "medium",
+            timeStyle: "short",
+            timeZone: "America/Guatemala"
+        }).format(new Date());
+
+        return [
+            "NEX-UP | Check iPhone",
+            "Consulta: " + serviceName,
+            "IMEI: " + imei,
+            "Fecha: " + timestamp,
+            "",
+            "RESULTADO",
+            details,
+            "",
+            "nex-up.online"
+        ].join("\n");
+    }
+
+    async function copyBrandedResult() {
+        if (!brandedResult) {
+            return;
+        }
+
+        try {
+            if (window.isSecureContext && navigator.clipboard && navigator.clipboard.writeText) {
+                try {
+                    await navigator.clipboard.writeText(brandedResult);
+                    copyFeedback.textContent = "Resultado copiado con la marca Nex-Up.";
+                    return;
+                } catch (error) {
+                    console.error("La API del portapapeles no pudo copiar el resultado.", error);
+                }
+            }
+
+            if (!copyWithSelection(brandedResult)) {
+                throw new Error("El navegador no permitió copiar el resultado.");
+            }
+            copyFeedback.textContent = "Resultado copiado con la marca Nex-Up.";
+        } catch (error) {
+            console.error("No se pudo copiar el resultado.", error);
+            copyFeedback.textContent = "No se pudo copiar. Selecciona y copia el resultado manualmente.";
+        }
+    }
+
+    function copyWithSelection(text) {
+        const temporaryInput = document.createElement("textarea");
+        temporaryInput.value = text;
+        temporaryInput.setAttribute("readonly", "");
+        temporaryInput.style.position = "fixed";
+        temporaryInput.style.opacity = "0";
+        document.body.appendChild(temporaryInput);
+        temporaryInput.select();
+        try {
+            return document.execCommand("copy");
+        } finally {
+            temporaryInput.remove();
+        }
     }
 
     function updateFmiCompatibilityNotice() {
@@ -30,9 +100,9 @@
         const service = serviceInput.value;
         const endpoint = window.NEX_UP_CONFIG && window.NEX_UP_CONFIG.iphoneCarrierApiUrl;
         const serviceNames = {
-            "103": "Carrier",
-            "78": "Carrier + FMI",
-            "3": "Solo FMI"
+            "103": "Operador (Carrier)",
+            "78": "Operador + estado de iCloud (Carrier + FMI)",
+            "3": "Solo estado de iCloud (FMI)"
         };
 
         if (!/^\d{15}$/.test(imei)) {
@@ -92,6 +162,7 @@
                 return;
             }
 
+            brandedResult = buildBrandedResult(serviceNames[service], imei, payload.result);
             showResult(
                 "Resultado: " + serviceNames[service],
                 "Respuesta recibida de Sickw. Consultas restantes hoy: " + payload.remaining + ".",
@@ -109,4 +180,6 @@
             submitButton.textContent = "Consultar";
         }
     });
+
+    copyButton.addEventListener("click", copyBrandedResult);
 })();
