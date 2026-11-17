@@ -10,40 +10,181 @@
     const output = document.getElementById("carrier-output");
     const copyButton = document.getElementById("copy-result");
     const copyFeedback = document.getElementById("copy-feedback");
-    let brandedResult = "";
+    const hiddenProviderFields = new Set(["ip", "balance", "price", "id", "status"]);
+    const safeColorNames = new Set([
+        "aqua", "black", "blue", "cyan", "fuchsia", "gold", "gray", "green",
+        "lime", "magenta", "maroon", "navy", "olive", "orange", "purple",
+        "red", "silver", "teal", "white", "yellow"
+    ]);
+    let brandedResult = null;
 
     function showResult(title, message, data) {
         result.hidden = false;
         resultTitle.textContent = title;
         status.textContent = message;
         const hasData = data !== undefined && data !== null;
-        output.textContent = hasData
-            ? (typeof data === "string" ? data : JSON.stringify(data, null, 2))
-            : "";
+        output.replaceChildren();
+        if (hasData) {
+            renderProviderResult(output, data);
+        }
         output.hidden = !hasData;
         copyButton.hidden = !hasData;
         copyFeedback.textContent = "";
     }
 
     function buildBrandedResult(serviceName, imei, data) {
-        const details = typeof data === "string" ? data : JSON.stringify(data, null, 2);
         const timestamp = new Intl.DateTimeFormat("es-GT", {
             dateStyle: "medium",
             timeStyle: "short",
             timeZone: "America/Guatemala"
         }).format(new Date());
-
-        return [
+        const plainDetails = providerResultToText(data);
+        const plainText = [
             "NEX-UP | Check iPhone",
             "Consulta: " + serviceName,
             "IMEI: " + imei,
             "Fecha: " + timestamp,
             "",
             "RESULTADO",
-            details,
+            plainDetails,
             "",
             "nex-up.online"
         ].join("\n");
+
+        const report = document.createElement("div");
+        report.style.fontFamily = "Arial, sans-serif";
+        report.style.color = "#192b42";
+
+        const brand = document.createElement("h2");
+        brand.textContent = "NEX-UP | Check iPhone";
+        brand.style.color = "#087f8c";
+        report.appendChild(brand);
+
+        const details = document.createElement("p");
+        details.textContent = "Consulta: " + serviceName + "\nIMEI: " + imei + "\nFecha: " + timestamp;
+        details.style.whiteSpace = "pre-line";
+        report.appendChild(details);
+
+        const heading = document.createElement("h3");
+        heading.textContent = "Resultado";
+        report.appendChild(heading);
+
+        const providerOutput = document.createElement("div");
+        renderProviderResult(providerOutput, data);
+        report.appendChild(providerOutput);
+
+        const website = document.createElement("p");
+        website.textContent = "nex-up.online";
+        website.style.color = "#087f8c";
+        report.appendChild(website);
+
+        return { plainText, html: report.innerHTML };
+    }
+
+    function renderProviderResult(container, data) {
+        if (typeof data === "string") {
+            container.appendChild(sanitizeProviderMarkup(data));
+            return;
+        }
+
+        container.textContent = JSON.stringify(data, null, 2) || "";
+    }
+
+    function getPublicProviderResult(data) {
+        if (!data || typeof data !== "object" || Array.isArray(data)) {
+            return data;
+        }
+
+        if (Object.prototype.hasOwnProperty.call(data, "result")) {
+            return removePrivateProviderFields(data.result);
+        }
+
+        const publicFields = removePrivateProviderFields(data);
+        return Object.keys(publicFields).length > 0 ? publicFields : "El proveedor no devolvió detalles.";
+    }
+
+    function removePrivateProviderFields(data) {
+        if (Array.isArray(data)) {
+            return data.map(removePrivateProviderFields);
+        }
+        if (!data || typeof data !== "object") {
+            return data;
+        }
+
+        return Object.fromEntries(
+            Object.entries(data)
+                .filter(function (entry) {
+                    return !hiddenProviderFields.has(entry[0].toLowerCase());
+                })
+                .map(function (entry) {
+                    return [entry[0], removePrivateProviderFields(entry[1])];
+                })
+        );
+    }
+
+    function sanitizeProviderMarkup(markup) {
+        const parsed = new DOMParser().parseFromString(markup, "text/html");
+        const fragment = document.createDocumentFragment();
+        appendSafeNodes(parsed.body, fragment);
+        return fragment;
+    }
+
+    function appendSafeNodes(source, target) {
+        Array.from(source.childNodes).forEach(function (node) {
+            if (node.nodeType === Node.TEXT_NODE) {
+                target.appendChild(document.createTextNode(node.nodeValue));
+                return;
+            }
+
+            if (node.nodeType !== Node.ELEMENT_NODE) {
+                return;
+            }
+
+            const tagName = node.tagName.toUpperCase();
+            if (["SCRIPT", "STYLE", "IFRAME", "OBJECT", "SVG", "MATH"].includes(tagName)) {
+                return;
+            }
+
+            const allowedTags = new Set(["B", "STRONG", "I", "EM", "BR", "P", "DIV", "SPAN", "FONT"]);
+            if (!allowedTags.has(tagName)) {
+                appendSafeNodes(node, target);
+                return;
+            }
+
+            const safeTag = tagName === "FONT" ? "span" : tagName.toLowerCase();
+            const safeNode = document.createElement(safeTag);
+            if (tagName === "FONT") {
+                const color = getSafeColor(node.getAttribute("color"));
+                if (color) {
+                    safeNode.style.color = color;
+                }
+            } else if (tagName === "SPAN") {
+                const color = getSafeColor(node.style.color);
+                if (color) {
+                    safeNode.style.color = color;
+                }
+            }
+            target.appendChild(safeNode);
+            appendSafeNodes(node, safeNode);
+        });
+    }
+
+    function getSafeColor(value) {
+        const color = (value || "").trim().toLowerCase();
+        if (safeColorNames.has(color) || /^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/i.test(color)) {
+            return color;
+        }
+        return "";
+    }
+
+    function providerResultToText(data) {
+        if (typeof data !== "string") {
+            return JSON.stringify(data, null, 2) || "";
+        }
+
+        const textContainer = document.createElement("div");
+        textContainer.appendChild(sanitizeProviderMarkup(data));
+        return textContainer.textContent.trim();
     }
 
     async function copyBrandedResult() {
@@ -52,17 +193,29 @@
         }
 
         try {
-            if (window.isSecureContext && navigator.clipboard && navigator.clipboard.writeText) {
+            if (
+                window.isSecureContext &&
+                navigator.clipboard &&
+                navigator.clipboard.write &&
+                typeof ClipboardItem !== "undefined"
+            ) {
                 try {
-                    await navigator.clipboard.writeText(brandedResult);
+                    await navigator.clipboard.write([
+                        new ClipboardItem({
+                            "text/html": new Blob([brandedResult.html], { type: "text/html" }),
+                            "text/plain": new Blob([brandedResult.plainText], { type: "text/plain" })
+                        })
+                    ]);
                     copyFeedback.textContent = "Resultado copiado con la marca Nex-Up.";
                     return;
                 } catch (error) {
-                    console.error("La API del portapapeles no pudo copiar el resultado.", error);
+                    console.error("No se pudo copiar el formato enriquecido.", error);
                 }
             }
 
-            if (!copyWithSelection(brandedResult)) {
+            if (window.isSecureContext && navigator.clipboard && navigator.clipboard.writeText) {
+                await navigator.clipboard.writeText(brandedResult.plainText);
+            } else if (!copyWithSelection(brandedResult.plainText)) {
                 throw new Error("El navegador no permitió copiar el resultado.");
             }
             copyFeedback.textContent = "Resultado copiado con la marca Nex-Up.";
@@ -162,11 +315,12 @@
                 return;
             }
 
-            brandedResult = buildBrandedResult(serviceNames[service], imei, payload.result);
+            const publicResult = getPublicProviderResult(payload.result);
+            brandedResult = buildBrandedResult(serviceNames[service], imei, publicResult);
             showResult(
                 "Resultado: " + serviceNames[service],
                 "Respuesta recibida de Sickw. Consultas restantes hoy: " + payload.remaining + ".",
-                payload.result
+                publicResult
             );
         } catch (error) {
             console.error("Falló la consulta de carrier del iPhone.", error);

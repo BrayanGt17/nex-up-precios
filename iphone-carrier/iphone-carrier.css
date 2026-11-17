@@ -164,7 +164,7 @@
     color: rgba(240, 248, 255, 0.84);
 }
 
-.carrier-result pre {
+.carrier-output {
     max-height: 360px;
     margin-top: 0.9rem;
     padding: 0.9rem;
@@ -172,9 +172,18 @@
     border-radius: 8px;
     color: #e5f4f6;
     background: rgba(4, 17, 30, 0.5);
-    font: 0.8rem/1.55 Consolas, "Courier New", monospace;
-    white-space: pre-wrap;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    white-space: normal;
     overflow-wrap: anywhere;
+}
+
+.carrier-output[hidden] {
+    display: none;
+}
+
+.carrier-output p {
+    margin: 0.35rem 0;
 }
 
 .carrier-copy {
