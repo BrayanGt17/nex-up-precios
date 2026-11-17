@@ -110,9 +110,18 @@ export default {
         try {
             const upstream = await fetch(sickwUrl.toString(), {
                 method: "GET",
-                redirect: "error",
+                redirect: "manual",
                 signal: controller.signal
             });
+
+            if (upstream.status >= 300 && upstream.status < 400) {
+                console.error("Sickw redirected the carrier lookup; the redirect was not followed.");
+                return jsonResponse(
+                    { error: "El proveedor redirigió la consulta; no se siguió para proteger la clave de API." },
+                    502,
+                    corsHeaders
+                );
+            }
 
             if (!upstream.ok) {
                 return jsonResponse(
