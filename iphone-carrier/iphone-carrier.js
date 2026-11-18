@@ -10,6 +10,12 @@
     const output = document.getElementById("carrier-output");
     const copyButton = document.getElementById("copy-result");
     const copyFeedback = document.getElementById("copy-feedback");
+    const historyList = document.getElementById("carrier-history-list");
+    const historyEmpty = document.getElementById("carrier-history-empty");
+    const historyFeedback = document.getElementById("carrier-history-feedback");
+    const clearHistoryButton = document.getElementById("clear-history");
+    const historyStorageKey = "nexUpIphoneCheckHistory";
+    const historyLimit = 20;
     const hiddenProviderFields = new Set(["ip", "balance", "price", "id", "status"]);
     const safeColorNames = new Set([
         "aqua", "black", "blue", "cyan", "fuchsia", "gold", "gray", "green",
@@ -17,6 +23,7 @@
         "red", "silver", "teal", "white", "yellow"
     ]);
     let brandedResult = null;
+    let historyEntries = [];
 
     function showResult(title, message, data) {
         result.hidden = false;
@@ -40,7 +47,7 @@
         }).format(new Date());
         const plainDetails = providerResultToText(data);
         const plainText = [
-            "NEX-UP | Check iPhone",
+            "NEX-UP | IPhone Check",
             "Consulta: " + serviceName,
             "IMEI: " + imei,
             "Fecha: " + timestamp,
@@ -56,7 +63,7 @@
         report.style.color = "#192b42";
 
         const brand = document.createElement("h2");
-        brand.textContent = "NEX-UP | Check iPhone";
+        brand.textContent = "NEX-UP | IPhone Check";
         brand.style.color = "#087f8c";
         report.appendChild(brand);
 
@@ -88,6 +95,16 @@
         }
 
         container.textContent = JSON.stringify(data, null, 2) || "";
+    }
+
+    function prepareHistoryResult(data) {
+        if (typeof data !== "string") {
+            return removePrivateProviderFields(data);
+        }
+
+        const container = document.createElement("div");
+        container.appendChild(sanitizeProviderMarkup(data));
+        return container.innerHTML;
     }
 
     function getPublicProviderResult(data) {
@@ -204,6 +221,118 @@
         return textContainer.textContent.trim();
     }
 
+    function isHistoryEntry(entry) {
+        return Boolean(
+            entry &&
+            typeof entry === "object" &&
+            typeof entry.imei === "string" &&
+            /^\d{15}$/.test(entry.imei) &&
+            typeof entry.serviceName === "string" &&
+            typeof entry.createdAt === "string" &&
+            !Number.isNaN(Date.parse(entry.createdAt)) &&
+            entry.result !== undefined &&
+            entry.result !== null
+        );
+    }
+
+    function formatHistoryDate(value) {
+        return new Intl.DateTimeFormat("es-GT", {
+            dateStyle: "medium",
+            timeStyle: "short",
+            timeZone: "America/Guatemala"
+        }).format(new Date(value));
+    }
+
+    function renderHistory() {
+        historyList.replaceChildren();
+        historyEntries.forEach(function (entry) {
+            const item = document.createElement("li");
+            item.className = "carrier-history-entry";
+
+            const title = document.createElement("h3");
+            title.textContent = entry.serviceName;
+            item.appendChild(title);
+
+            const details = document.createElement("p");
+            details.className = "carrier-history-details";
+            details.textContent = "IMEI: " + entry.imei + " | " + formatHistoryDate(entry.createdAt);
+            item.appendChild(details);
+
+            const savedResult = document.createElement("div");
+            savedResult.className = "carrier-history-output";
+            renderProviderResult(savedResult, entry.result);
+            item.appendChild(savedResult);
+            historyList.appendChild(item);
+        });
+
+        const hasHistory = historyEntries.length > 0;
+        historyEmpty.hidden = hasHistory;
+        historyList.hidden = !hasHistory;
+        clearHistoryButton.disabled = !hasHistory;
+    }
+
+    function loadHistory() {
+        let serializedHistory;
+        try {
+            serializedHistory = window.localStorage.getItem(historyStorageKey);
+        } catch (error) {
+            console.error("No se pudo acceder al historial local.", error);
+            historyFeedback.textContent = "No se pudo acceder al historial guardado en este navegador.";
+            renderHistory();
+            return;
+        }
+
+        if (!serializedHistory) {
+            renderHistory();
+            return;
+        }
+
+        try {
+            const savedEntries = JSON.parse(serializedHistory);
+            if (!Array.isArray(savedEntries)) {
+                throw new TypeError("El historial guardado no tiene el formato esperado.");
+            }
+            historyEntries = savedEntries.filter(isHistoryEntry).slice(0, historyLimit);
+            if (historyEntries.length !== savedEntries.length) {
+                historyFeedback.textContent = "Algunas consultas guardadas no se pudieron mostrar.";
+            }
+        } catch (error) {
+            console.error("No se pudo leer el historial local.", error);
+            historyFeedback.textContent = "No se pudo leer el historial guardado en este navegador.";
+        }
+        renderHistory();
+    }
+
+    function saveHistoryEntry(entry) {
+        historyEntries = [entry].concat(historyEntries).slice(0, historyLimit);
+        renderHistory();
+        try {
+            window.localStorage.setItem(historyStorageKey, JSON.stringify(historyEntries));
+            historyFeedback.textContent = "Consulta guardada en este dispositivo.";
+        } catch (error) {
+            console.error("No se pudo guardar la consulta en el historial local.", error);
+            historyFeedback.textContent = "No se pudo guardar en este dispositivo; la consulta seguirá visible mientras esta página esté abierta.";
+        }
+    }
+
+    function clearHistory() {
+        if (!historyEntries.length || !window.confirm("¿Borrar el historial guardado en este dispositivo?")) {
+            return;
+        }
+
+        try {
+            window.localStorage.removeItem(historyStorageKey);
+        } catch (error) {
+            console.error("No se pudo borrar el historial local.", error);
+            historyFeedback.textContent = "No se pudo borrar el historial de este navegador.";
+            return;
+        }
+
+        historyEntries = [];
+        renderHistory();
+        historyFeedback.textContent = "Historial borrado de este dispositivo.";
+    }
+
     async function copyBrandedResult() {
         if (!brandedResult) {
             return;
@@ -223,7 +352,7 @@
                             "text/plain": new Blob([brandedResult.plainText], { type: "text/plain" })
                         })
                     ]);
-                    copyFeedback.textContent = "Resultado copiado con la marca Nex-Up.";
+                    copyFeedback.textContent = "Resultado copiado.";
                     return;
                 } catch (error) {
                     console.error("No se pudo copiar el formato enriquecido.", error);
@@ -235,7 +364,7 @@
             } else if (!copyWithSelection(brandedResult.plainText)) {
                 throw new Error("El navegador no permitió copiar el resultado.");
             }
-            copyFeedback.textContent = "Resultado copiado con la marca Nex-Up.";
+            copyFeedback.textContent = "Resultado copiado.";
         } catch (error) {
             console.error("No se pudo copiar el resultado.", error);
             copyFeedback.textContent = "No se pudo copiar. Selecciona y copia el resultado manualmente.";
@@ -263,6 +392,8 @@
 
     serviceInput.addEventListener("change", updateFmiCompatibilityNotice);
     updateFmiCompatibilityNotice();
+    loadHistory();
+    clearHistoryButton.addEventListener("click", clearHistory);
 
     form.addEventListener("submit", async function (event) {
         event.preventDefault();
@@ -336,9 +467,17 @@
             brandedResult = buildBrandedResult(serviceNames[service], imei, publicResult);
             showResult(
                 "Resultado: " + serviceNames[service],
-                "Respuesta recibida de Sickw. Consultas restantes hoy: " + payload.remaining + ".",
+                "Respuesta recibida. Consultas restantes hoy: " + payload.remaining + ".",
                 publicResult
             );
+            if (publicResult !== undefined && publicResult !== null) {
+                saveHistoryEntry({
+                    createdAt: new Date().toISOString(),
+                    serviceName: serviceNames[service],
+                    imei: imei,
+                    result: prepareHistoryResult(publicResult)
+                });
+            }
         } catch (error) {
             console.error("Falló la consulta de carrier del iPhone.", error);
             showResult(

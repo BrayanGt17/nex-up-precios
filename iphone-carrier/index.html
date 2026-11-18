@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Consulta la información de operador de un iPhone de Estados Unidos.">
-    <title>Check Carrier iPhone | Nex-Up</title>
+    <title>IPhone Check | Nex-Up</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../professional.css">
     <link rel="stylesheet" href="../holiday.css">
@@ -24,7 +24,7 @@
                 <li><a href="../drivers/">Drivers &amp; Tools</a></li>
                 <li><a href="../renta-tools/" data-page-link="rentalTools">Renta Tools</a></li>
                 <li><a href="../glosario/">Glosario</a></li>
-                <li><a class="active" href="./" aria-current="page">Check Carrier iPhone</a></li>
+                <li><a class="active" href="./" aria-current="page">IPhone Check</a></li>
                 <li><a href="../index.html#contacto">Contacto</a></li>
             </ul>
         </nav>
@@ -32,8 +32,8 @@
 
     <main class="carrier-main">
         <section class="carrier-panel" aria-labelledby="carrier-title">
-            <span class="carrier-eyebrow">NEX-UP <i></i> CHECK IPHONE</span>
-            <h1 id="carrier-title">Check <span>iPhone</span></h1>
+            <span class="carrier-eyebrow">NEX-UP <i></i> IPHONE CHECK</span>
+            <h1 id="carrier-title">IPhone <span>Check</span></h1>
             <p class="carrier-intro">Carrier es el operador de telefonía móvil. FMI indica el estado de iCloud (Buscar mi iPhone). Elige qué información quieres consultar.</p>
 
             <form id="carrier-form" class="carrier-form">
@@ -72,7 +72,20 @@
                 <p id="copy-feedback" class="copy-feedback" aria-live="polite"></p>
             </section>
 
-            <p class="carrier-notice">Límite compartido de hasta 10 consultas por IP al día (hora de Guatemala), entre las tres modalidades. El resultado copiado incluye la marca Nex-Up y los datos útiles, sin metadatos internos del proveedor.</p>
+            <section class="carrier-history" aria-labelledby="carrier-history-title">
+                <div class="carrier-history-header">
+                    <div>
+                        <h2 id="carrier-history-title">Historial de consultas</h2>
+                        <p>Se guardan las 20 consultas exitosas más recientes solo en este navegador y dispositivo; no se envían al servidor. En dispositivos compartidos, otras personas podrían verlas.</p>
+                    </div>
+                    <button id="clear-history" class="carrier-history-clear" type="button" disabled>Borrar historial</button>
+                </div>
+                <p id="carrier-history-empty" class="carrier-history-empty">Aún no tienes consultas guardadas.</p>
+                <ol id="carrier-history-list" class="carrier-history-list" hidden></ol>
+                <p id="carrier-history-feedback" class="copy-feedback" aria-live="polite"></p>
+            </section>
+
+            <p class="carrier-notice">Límite .</p>
         </section>
     </main>
 
