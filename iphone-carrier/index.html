@@ -44,23 +44,24 @@
                     <option value="3">Solo estado de iCloud (FMI)</option>
                 </select>
 
-                <label for="imei">IMEI del iPhone</label>
+                <label for="device-id">IMEI o número de serie del iPhone</label>
                 <div class="carrier-input-row">
                     <input
-                        id="imei"
-                        name="imei"
+                        id="device-id"
+                        name="deviceId"
                         type="text"
-                        inputmode="numeric"
+                        inputmode="text"
+                        autocapitalize="characters"
                         autocomplete="off"
                         maxlength="15"
-                        pattern="[0-9]{15}"
-                        placeholder="Ingresa los 15 dígitos"
-                        aria-describedby="imei-help fmi-compatibility"
+                        pattern="[0-9]{15}|[A-Za-z0-9]{8,12}"
+                        placeholder="IMEI (15 dígitos) o serie (8-12 caracteres)"
+                        aria-describedby="device-id-help fmi-compatibility"
                         required
                     >
                     <button id="carrier-submit" type="submit">Consultar</button>
                 </div>
-                <small id="imei-help">Marca *#06# en el iPhone para ver su IMEI.</small>
+                <small id="device-id-help">Marca *#06# para ver el IMEI o busca el número de serie en Ajustes &gt; General &gt; Información.</small>
                 <small id="fmi-compatibility" hidden>La consulta Solo FMI no es compatible con dispositivos solo Wi-Fi.</small>
             </form>
 

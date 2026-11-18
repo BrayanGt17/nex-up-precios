@@ -45,10 +45,16 @@ export default {
             return jsonResponse({ error: "Ruta no encontrada." }, 404, corsHeaders);
         }
 
-        const imei = requestUrl.searchParams.get("imei") || "";
+        const deviceId = requestUrl.searchParams.get("imei") || requestUrl.searchParams.get("deviceId") || "";
+        const isImei = /^\d{15}$/.test(deviceId);
+        const isSerialNumber = /^[a-z0-9]{8,12}$/i.test(deviceId);
         const service = requestUrl.searchParams.get("service") || "103";
-        if (!/^\d{15}$/.test(imei)) {
-            return jsonResponse({ error: "El IMEI debe contener exactamente 15 dígitos." }, 400, corsHeaders);
+        if (!isImei && !isSerialNumber) {
+            return jsonResponse(
+                { error: "Ingresa un IMEI de 15 dígitos o un número de serie de 8 a 12 caracteres alfanuméricos." },
+                400,
+                corsHeaders
+            );
         }
 
         if (!SICKW_SERVICES.has(service)) {
@@ -99,7 +105,7 @@ export default {
         const sickwUrl = new URL("https://sickw.com/api.php");
         sickwUrl.searchParams.set("format", "json");
         sickwUrl.searchParams.set("key", env.SICKW_API_KEY);
-        sickwUrl.searchParams.set("imei", imei);
+        sickwUrl.searchParams.set("imei", isImei ? deviceId : deviceId.toUpperCase());
         sickwUrl.searchParams.set("service", service);
 
         const controller = new AbortController();

@@ -1,6 +1,6 @@
 (function () {
     const form = document.getElementById("carrier-form");
-    const imeiInput = document.getElementById("imei");
+    const deviceIdInput = document.getElementById("device-id");
     const serviceInput = document.getElementById("carrier-service");
     const fmiCompatibility = document.getElementById("fmi-compatibility");
     const submitButton = document.getElementById("carrier-submit");
@@ -25,6 +25,26 @@
     let brandedResult = null;
     let historyEntries = [];
 
+    function isValidImei(value) {
+        return /^\d{15}$/.test(value);
+    }
+
+    function isValidSerialNumber(value) {
+        return /^[a-z0-9]{8,12}$/i.test(value);
+    }
+
+    function isValidDeviceIdentifier(value) {
+        return isValidImei(value) || isValidSerialNumber(value);
+    }
+
+    function getIdentifierLabel(value) {
+        return isValidImei(value) ? "IMEI" : "Número de serie";
+    }
+
+    function getHistoryIdentifier(entry) {
+        return typeof entry.deviceId === "string" ? entry.deviceId : entry.imei;
+    }
+
     function showResult(title, message, data) {
         result.hidden = false;
         resultTitle.textContent = title;
@@ -39,7 +59,7 @@
         copyFeedback.textContent = "";
     }
 
-    function buildBrandedResult(serviceName, imei, data) {
+    function buildBrandedResult(serviceName, deviceId, data) {
         const timestamp = new Intl.DateTimeFormat("es-GT", {
             dateStyle: "medium",
             timeStyle: "short",
@@ -49,7 +69,7 @@
         const plainText = [
             "NEX-UP | IPhone Check",
             "Consulta: " + serviceName,
-            "IMEI: " + imei,
+            getIdentifierLabel(deviceId) + ": " + deviceId,
             "Fecha: " + timestamp,
             "",
             "RESULTADO",
@@ -68,7 +88,7 @@
         report.appendChild(brand);
 
         const details = document.createElement("p");
-        details.textContent = "Consulta: " + serviceName + "\nIMEI: " + imei + "\nFecha: " + timestamp;
+        details.textContent = "Consulta: " + serviceName + "\n" + getIdentifierLabel(deviceId) + ": " + deviceId + "\nFecha: " + timestamp;
         details.style.whiteSpace = "pre-line";
         report.appendChild(details);
 
@@ -222,11 +242,12 @@
     }
 
     function isHistoryEntry(entry) {
+        const deviceId = entry && typeof entry === "object" ? getHistoryIdentifier(entry) : "";
         return Boolean(
             entry &&
             typeof entry === "object" &&
-            typeof entry.imei === "string" &&
-            /^\d{15}$/.test(entry.imei) &&
+            typeof deviceId === "string" &&
+            isValidDeviceIdentifier(deviceId) &&
             typeof entry.serviceName === "string" &&
             typeof entry.createdAt === "string" &&
             !Number.isNaN(Date.parse(entry.createdAt)) &&
@@ -255,7 +276,8 @@
 
             const details = document.createElement("p");
             details.className = "carrier-history-details";
-            details.textContent = "IMEI: " + entry.imei + " | " + formatHistoryDate(entry.createdAt);
+            const deviceId = getHistoryIdentifier(entry);
+            details.textContent = getIdentifierLabel(deviceId) + ": " + deviceId + " | " + formatHistoryDate(entry.createdAt);
             item.appendChild(details);
 
             const savedResult = document.createElement("div");
@@ -397,7 +419,8 @@
 
     form.addEventListener("submit", async function (event) {
         event.preventDefault();
-        const imei = imeiInput.value.trim();
+        const deviceId = deviceIdInput.value.trim().toUpperCase();
+        deviceIdInput.value = deviceId;
         const service = serviceInput.value;
         const endpoint = window.NEX_UP_CONFIG && window.NEX_UP_CONFIG.iphoneCarrierApiUrl;
         const serviceNames = {
@@ -406,9 +429,13 @@
             "3": "Solo estado de iCloud (FMI)"
         };
 
-        if (!/^\d{15}$/.test(imei)) {
-            showResult("IMEI no válido", "Ingresa un IMEI de exactamente 15 dígitos.", null);
-            imeiInput.focus();
+        if (!isValidDeviceIdentifier(deviceId)) {
+            showResult(
+                "Identificador no válido",
+                "Ingresa un IMEI de 15 dígitos o un número de serie de 8 a 12 caracteres alfanuméricos.",
+                null
+            );
+            deviceIdInput.focus();
             return;
         }
 
@@ -441,7 +468,7 @@
             return;
         }
 
-        endpointUrl.searchParams.set("imei", imei);
+        endpointUrl.searchParams.set("imei", deviceId);
         endpointUrl.searchParams.set("service", service);
         submitButton.disabled = true;
         submitButton.textContent = "Consultando...";
@@ -464,7 +491,7 @@
             }
 
             const publicResult = getPublicProviderResult(payload.result);
-            brandedResult = buildBrandedResult(serviceNames[service], imei, publicResult);
+            brandedResult = buildBrandedResult(serviceNames[service], deviceId, publicResult);
             showResult(
                 "Resultado: " + serviceNames[service],
                 "Respuesta recibida. Consultas restantes hoy: " + payload.remaining + ".",
@@ -474,7 +501,7 @@
                 saveHistoryEntry({
                     createdAt: new Date().toISOString(),
                     serviceName: serviceNames[service],
-                    imei: imei,
+                    deviceId: deviceId,
                     result: prepareHistoryResult(publicResult)
                 });
             }

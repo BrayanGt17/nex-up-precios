@@ -19,8 +19,8 @@ Wrangler pedirá la clave de Sickw de forma interactiva. Si la clave se comparti
 - Operador + estado de iCloud / FMI: servicio `78`.
 - Solo estado de iCloud / FMI: servicio `3`.
 
-El Worker acepta IMEI de 15 dígitos y permite hasta 10 consultas diarias por IP, compartidas entre las tres modalidades. El contador se reinicia a medianoche, hora de Guatemala. La modalidad Solo FMI no es compatible con dispositivos únicamente Wi-Fi.
+El Worker acepta IMEI de 15 dígitos o números de serie alfanuméricos de 8 a 12 caracteres y permite hasta 10 consultas diarias por IP, compartidas entre las tres modalidades. Los números de serie se envían en mayúsculas. El contador se reinicia a medianoche, hora de Guatemala. La modalidad Solo FMI no es compatible con dispositivos únicamente Wi-Fi.
 
-El límite se administra mediante un Durable Object con almacenamiento SQLite. El Worker conserva el contador diario asociado a un hash de la IP; no guarda los IMEI ni las respuestas. Sickw recibe el IMEI para procesar la consulta y puede tratarlo conforme a sus propias políticas.
+El límite se administra mediante un Durable Object con almacenamiento SQLite. El Worker conserva el contador diario asociado a un hash de la IP; no guarda los identificadores ni las respuestas. Sickw recibe el IMEI o número de serie para procesar la consulta y puede tratarlo conforme a sus propias políticas.
 
 Los intentos válidos cuentan aunque Sickw no devuelva resultados o haya un error de conexión.
