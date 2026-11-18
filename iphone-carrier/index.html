@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../holiday.css">
     <link rel="stylesheet" href="iphone-carrier.css">
     <script src="../site-config.js"></script>
+    <script src="../site-access.js"></script>
     <script src="../particles.js" defer></script>
     <script src="iphone-carrier.js" defer></script>
 </head>
@@ -69,21 +70,27 @@
                 <h2 id="carrier-result-title">Resultado de consulta</h2>
                 <p id="carrier-status"></p>
                 <div id="carrier-output" class="carrier-output"></div>
-                <button id="copy-result" class="carrier-copy" type="button" hidden>Copiar resultado Nex-Up</button>
+                <button id="copy-result" class="carrier-copy" type="button" hidden>Copiar resultado</button>
                 <p id="copy-feedback" class="copy-feedback" aria-live="polite"></p>
             </section>
 
             <section class="carrier-history" aria-labelledby="carrier-history-title">
                 <div class="carrier-history-header">
                     <div>
-                        <h2 id="carrier-history-title">Historial de consultas</h2>
-                        <p>Se guardan las 20 consultas exitosas más recientes solo en este navegador y dispositivo; no se envían al servidor. En dispositivos compartidos, otras personas podrían verlas.</p>
+                        <button id="toggle-history" class="carrier-history-toggle" type="button" aria-expanded="false" aria-controls="carrier-history-content">
+                            <span id="carrier-history-title" class="carrier-history-title" role="heading" aria-level="2">Historial de consultas</span>
+                            <span id="carrier-history-count" class="carrier-history-count" aria-label="0 consultas guardadas">0</span>
+                            <span class="carrier-history-chevron" aria-hidden="true">⌄</span>
+                        </button>
+                        
                     </div>
                     <button id="clear-history" class="carrier-history-clear" type="button" disabled>Borrar historial</button>
                 </div>
-                <p id="carrier-history-empty" class="carrier-history-empty">Aún no tienes consultas guardadas.</p>
-                <ol id="carrier-history-list" class="carrier-history-list" hidden></ol>
-                <p id="carrier-history-feedback" class="copy-feedback" aria-live="polite"></p>
+                <div id="carrier-history-content" class="carrier-history-content" hidden>
+                    <p id="carrier-history-empty" class="carrier-history-empty">Aún no tienes consultas guardadas.</p>
+                    <ol id="carrier-history-list" class="carrier-history-list" hidden></ol>
+                    <p id="carrier-history-feedback" class="copy-feedback" aria-live="polite"></p>
+                </div>
             </section>
 
             <p class="carrier-notice">Límite .</p>

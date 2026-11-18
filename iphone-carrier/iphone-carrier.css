@@ -232,11 +232,68 @@
     font-size: 1rem;
 }
 
+.carrier-history-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.15rem 0;
+    border: 0;
+    color: #8fe2e7;
+    background: transparent;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.carrier-history-title {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.carrier-history-count {
+    display: inline-grid;
+    min-width: 1.45rem;
+    height: 1.45rem;
+    padding: 0 0.35rem;
+    place-items: center;
+    border: 1px solid rgba(143, 226, 231, 0.3);
+    border-radius: 999px;
+    color: #eafcff;
+    background: rgba(8, 127, 140, 0.28);
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.carrier-history-chevron {
+    margin-left: auto;
+    color: rgba(240, 248, 255, 0.75);
+    font-size: 1.2rem;
+    transition: transform 0.2s ease;
+}
+
+.carrier-history-toggle[aria-expanded="true"] .carrier-history-chevron {
+    transform: rotate(180deg);
+}
+
+.carrier-history-toggle:focus-visible,
+.carrier-history-clear:focus-visible {
+    outline: 2px solid #75dce3;
+    outline-offset: 3px;
+}
+
 .carrier-history-header p,
 .carrier-history-empty {
     margin: 0.4rem 0 0;
     color: rgba(240, 248, 255, 0.72);
     font-size: 0.86rem;
+}
+
+.carrier-history-content {
+    margin-top: 0.9rem;
+}
+
+.carrier-history-content[hidden] {
+    display: none;
 }
 
 .carrier-history-clear {

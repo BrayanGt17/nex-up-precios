@@ -10,12 +10,16 @@
     const output = document.getElementById("carrier-output");
     const copyButton = document.getElementById("copy-result");
     const copyFeedback = document.getElementById("copy-feedback");
+    const historyToggle = document.getElementById("toggle-history");
+    const historyCount = document.getElementById("carrier-history-count");
+    const historyContent = document.getElementById("carrier-history-content");
     const historyList = document.getElementById("carrier-history-list");
     const historyEmpty = document.getElementById("carrier-history-empty");
     const historyFeedback = document.getElementById("carrier-history-feedback");
     const clearHistoryButton = document.getElementById("clear-history");
     const historyStorageKey = "nexUpIphoneCheckHistory";
     const historyLimit = 20;
+    const historyRetentionMs = 24 * 60 * 60 * 1000;
     const hiddenProviderFields = new Set(["ip", "balance", "price", "id", "status"]);
     const safeColorNames = new Set([
         "aqua", "black", "blue", "cyan", "fuchsia", "gold", "gray", "green",
@@ -24,6 +28,7 @@
     ]);
     let brandedResult = null;
     let historyEntries = [];
+    let historyExpirationTimer = null;
 
     function isValidImei(value) {
         return /^\d{15}$/.test(value);
@@ -288,9 +293,71 @@
         });
 
         const hasHistory = historyEntries.length > 0;
+        historyCount.textContent = String(historyEntries.length);
+        historyCount.setAttribute(
+            "aria-label",
+            historyEntries.length + (historyEntries.length === 1 ? " consulta guardada" : " consultas guardadas")
+        );
         historyEmpty.hidden = hasHistory;
         historyList.hidden = !hasHistory;
         clearHistoryButton.disabled = !hasHistory;
+    }
+
+    function isHistoryEntryCurrent(entry, now) {
+        const createdAt = Date.parse(entry.createdAt);
+        return createdAt <= now && now - createdAt < historyRetentionMs;
+    }
+
+    function persistHistory() {
+        try {
+            if (historyEntries.length) {
+                window.localStorage.setItem(historyStorageKey, JSON.stringify(historyEntries));
+            } else {
+                window.localStorage.removeItem(historyStorageKey);
+            }
+            return true;
+        } catch (error) {
+            console.error("No se pudo actualizar el historial local.", error);
+            historyFeedback.textContent = "No se pudo actualizar el historial guardado en este navegador.";
+            return false;
+        }
+    }
+
+    function expireHistory() {
+        const now = Date.now();
+        const previousCount = historyEntries.length;
+        historyEntries = historyEntries.filter(function (entry) {
+            return isHistoryEntry(entry) && isHistoryEntryCurrent(entry, now);
+        });
+
+        if (historyEntries.length !== previousCount) {
+            if (persistHistory()) {
+                historyFeedback.textContent = "Las consultas con más de 24 horas se eliminaron.";
+            }
+            renderHistory();
+        }
+        scheduleHistoryExpiration();
+    }
+
+    function scheduleHistoryExpiration() {
+        if (historyExpirationTimer !== null) {
+            window.clearTimeout(historyExpirationTimer);
+            historyExpirationTimer = null;
+        }
+        if (!historyEntries.length) {
+            return;
+        }
+
+        const nextExpiration = Math.min.apply(
+            null,
+            historyEntries.map(function (entry) {
+                return Date.parse(entry.createdAt) + historyRetentionMs;
+            })
+        );
+        historyExpirationTimer = window.setTimeout(
+            expireHistory,
+            Math.max(0, nextExpiration - Date.now())
+        );
     }
 
     function loadHistory() {
@@ -314,27 +381,31 @@
             if (!Array.isArray(savedEntries)) {
                 throw new TypeError("El historial guardado no tiene el formato esperado.");
             }
-            historyEntries = savedEntries.filter(isHistoryEntry).slice(0, historyLimit);
+            const now = Date.now();
+            const currentEntries = savedEntries.filter(function (entry) {
+                return isHistoryEntry(entry) && isHistoryEntryCurrent(entry, now);
+            });
+            historyEntries = currentEntries.slice(0, historyLimit);
             if (historyEntries.length !== savedEntries.length) {
-                historyFeedback.textContent = "Algunas consultas guardadas no se pudieron mostrar.";
+                if (persistHistory()) {
+                    historyFeedback.textContent = "Se eliminaron las consultas caducadas o no válidas.";
+                }
             }
         } catch (error) {
             console.error("No se pudo leer el historial local.", error);
             historyFeedback.textContent = "No se pudo leer el historial guardado en este navegador.";
         }
         renderHistory();
+        scheduleHistoryExpiration();
     }
 
     function saveHistoryEntry(entry) {
         historyEntries = [entry].concat(historyEntries).slice(0, historyLimit);
         renderHistory();
-        try {
-            window.localStorage.setItem(historyStorageKey, JSON.stringify(historyEntries));
+        if (persistHistory()) {
             historyFeedback.textContent = "Consulta guardada en este dispositivo.";
-        } catch (error) {
-            console.error("No se pudo guardar la consulta en el historial local.", error);
-            historyFeedback.textContent = "No se pudo guardar en este dispositivo; la consulta seguirá visible mientras esta página esté abierta.";
         }
+        scheduleHistoryExpiration();
     }
 
     function clearHistory() {
@@ -351,6 +422,10 @@
         }
 
         historyEntries = [];
+        if (historyExpirationTimer !== null) {
+            window.clearTimeout(historyExpirationTimer);
+            historyExpirationTimer = null;
+        }
         renderHistory();
         historyFeedback.textContent = "Historial borrado de este dispositivo.";
     }
@@ -415,6 +490,11 @@
     serviceInput.addEventListener("change", updateFmiCompatibilityNotice);
     updateFmiCompatibilityNotice();
     loadHistory();
+    historyToggle.addEventListener("click", function () {
+        const isExpanded = historyToggle.getAttribute("aria-expanded") === "true";
+        historyToggle.setAttribute("aria-expanded", String(!isExpanded));
+        historyContent.hidden = isExpanded;
+    });
     clearHistoryButton.addEventListener("click", clearHistory);
 
     form.addEventListener("submit", async function (event) {
